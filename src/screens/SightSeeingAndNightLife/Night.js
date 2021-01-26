@@ -15,7 +15,7 @@ import { up } from  './Count';
 import { down } from  './Count';
 import { NightLifeChecked } from  './Count';
 
-//Test
+//Test//
 const WhiteTextTypography = withStyles({
     root: {
       "fontFamily": "Calibri Light",
