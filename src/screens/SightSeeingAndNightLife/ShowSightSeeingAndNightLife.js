@@ -228,7 +228,7 @@ class ShowSightSeeing extends Component {
                 
             
             })
-////ChenAmit
+////ChenAmitChen
             .then(something => { 
                 
                 for (let i = 0; i < savings.try2.length; i++) {
