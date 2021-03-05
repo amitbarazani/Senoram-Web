@@ -578,6 +578,8 @@ class FinalTrack extends Component {
 
         }
 
+        
+
     }
 
 
@@ -592,7 +594,9 @@ class FinalTrack extends Component {
                 <Grid container justify="center">
                     <h5>
                         <h1>Trip Plan</h1>
-                        <Location location={this.state.location} name="Starting Point" />
+                        <p>{this.state.location} </p>
+                        <p>Starting Point</p>
+                       
                         {this.state.sights.map(element => (
 
                             <Final
@@ -600,11 +604,16 @@ class FinalTrack extends Component {
                                 name={element.name}
                                 rank={element.rank}
                                 distance={element.distance}
+                                url= {element.photoUrl}
+                                type= {element.type}
 
                             />
                         ))
                         }
-                        <Location location={this.state.location} name={this.state.ending} />
+                        
+                        <p>{this.state.location} </p>
+                        <p>{this.state.ending} </p>
+                       
                     </h5>
                     
 
@@ -636,3 +645,8 @@ export default FinalTrack;
 
 
 // address={resturant.address}
+
+
+// <Location location={this.state.location} name={this.state.ending} />
+
+//  <Location location={this.state.location} name="Starting Point" />

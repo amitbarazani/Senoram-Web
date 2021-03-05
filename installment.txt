@@ -10,6 +10,8 @@ npm i react-bootstrap
 npm i @material-ui/icons
 npm i @material-ui/lab
 npm i priorityqueue
-npm i graph-data-structure
-npm i node-dijkstra
 npm install emailjs-com — save
+npm install -g firebase-tools
+firebase init
+firebase deploy
+npm install -g express

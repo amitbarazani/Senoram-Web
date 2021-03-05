@@ -13,18 +13,36 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import './Resturant.css';
 
 const WhiteTextTypography = withStyles({
-    root: {
-      "fontFamily": "Calibri Light",
-      color: "#FFFFFF",
-    }
-  })(Typography);
+  root: {
+    "fontFamily": "Calibri Light",
+    color: "#303030",
+    
+    
+    
+    //color: "#FFFFFF",
+  }
+})(Typography);
 
-  const WhiteTextTypography2 = withStyles({
-    root: {
-      "fontFamily": "Calibri Light",
-      "fontSize": 30,
-    }
-  })(Typography);
+
+const WhiteTextTypography3 = withStyles({
+  root: {
+    "fontFamily": "Calibri Light",
+    "fontSize": 15,
+    color: "#303030",
+    "font-weight": "bold",
+   
+    //color: "#FFFFFF",
+  }
+})(Typography);  
+const WhiteTextTypography2 = withStyles({
+  root: {
+    "fontFamily": "Calibri Light",
+    "fontSize": 30,
+    
+    //color: "#002984",
+   
+  }
+})(Typography);
   
   
  
@@ -52,6 +70,7 @@ const useStyles = makeStyles({
 
 const Resturant = (props) => {
 
+  let help = props.url;
     
     const [counter, setCounter] = useState({ counter: 0 });
     const [state, setState] = React.useState({
@@ -72,14 +91,19 @@ const Resturant = (props) => {
     return ( 
     <div>
 
-<Card className={classes.root} variant="outlined" style={{backgroundColor: "#757de8"}} >
-
+<Card className={classes.root} variant="outlined" style={{backgroundColor: "#D3D3D3"}} >
+<img src={`${help}`} className="photo" />
       <CardContent>
      
         <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography>Rank: {props.rank} </WhiteTextTypography> </Typography>
-        <Typography  variant="h6" component="h2"> <WhiteTextTypography2> {props.name} </WhiteTextTypography2></Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography>Distance: {props.distance} KM </WhiteTextTypography> </Typography>
-  
+        <Typography  variant="h6" component="h2"> <WhiteTextTypography2> {props.name} </WhiteTextTypography2></Typography>
+
+       
+        
+        
+        
+        <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography3> {props.open} </WhiteTextTypography3> </Typography>
         
         
        

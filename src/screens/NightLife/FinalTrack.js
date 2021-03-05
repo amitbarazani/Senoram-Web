@@ -91,6 +91,12 @@ class FinalTrack extends Component {
             //sorted[i].distance = "distnace" + sorted[i].distance;
             this.setState({ sights: sorted });
 
+            let tt = distance(actuallSightsChecked[0].geoCode.latitude, actuallSightsChecked[0].geoCode.longitude, this.props.location.a, this.props.location.b, 'K');
+            //console.log(lan_sight);
+            let c = "Distance: " + tt + " KM"
+            this.setState({ ending: c });
+
+
         }
         if (actuallSightsChecked.length == 2) {
 
@@ -585,7 +591,8 @@ class FinalTrack extends Component {
                 <Grid container justify="center">
                     <h5>
                         <h1>Trip Plan</h1>
-                        <Location location={this.state.location} name="Starting Point" />
+                        <p>{this.state.location} </p>
+                        <p>Starting Point</p>
                         {this.state.sights.map(element => (
 
                             <Final
@@ -593,11 +600,14 @@ class FinalTrack extends Component {
                                 name={element.name}
                                 rank={element.rank}
                                 distance={element.distance}
+                                url= {element.photoUrl}
+                                type= {element.type}
 
                             />
                         ))
                         }
-                        <Location location={this.state.location} name={this.state.ending} />
+                        <p>{this.state.location} </p>
+                        <p>{this.state.ending} </p>
                     </h5>
                     
 

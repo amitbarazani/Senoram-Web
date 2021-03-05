@@ -7,7 +7,10 @@ import "./Input.css";
 import Switch from '@material-ui/core/Switch';
 import Geocode from "react-geocode";
 import axios from '../Firebase/axios';
-
+import savings from './SightSeeing/Savings';
+import savings2 from './NightLife/Savings2';
+import savings3 from './Resturants/Savings3';
+import savings4 from './SightSeeingAndNightLife/Savings4';
 
 const useStyles = makeStyles({
     sliderWidth: {
@@ -209,17 +212,304 @@ function getSightSeeingAndNightLife (location,lat, lng, checkedSightseeing, chec
         radius: 20,
         category: "SIGHTS"
     }).then(function (response) {
+
+        //<3
+        savings4.try1 = response.data;
+        savings4.lat1 = lat;
+        savings4.lng1 = lng;
+        savings4.location1 = location;
+
+        ////////////////////////////
        
-        
+        for (let key in savings4.try1) {
+            savings4.try1[key].photoUrl = "not yet";
+            savings4.try1[key].place_id = 0;
+            savings4.try1[key].address = "";
+            savings4.try1[key].open = "Closed";
+            savings4.try1[key].type = undefined;
+            let photoName = savings4.try1[key].name;
+            var map;
+            var service;
+            var infowindow;
+            const google = window.google;
+            initMap(savings4.try1[key]);
+
+            function initMap(pointer) {
+                var sydney = new google.maps.LatLng(-33.867, 151.195);
+
+                infowindow = new google.maps.InfoWindow();
+
+                map = new google.maps.Map(
+                    document.createElement("p"), { center: sydney, zoom: 15 });
+
+
+                var request = {
+                    query: photoName,
+                    fields: ['geometry', 'place_id', 'photos', 'formatted_address', 'opening_hours','type'],
+                };
+                
+                var service = new google.maps.places.PlacesService(map);
+                service.findPlaceFromQuery(request, function (results, status) {
+                    
+                    
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+                        try {
+                            if (results[0].types != undefined)
+                            {
+                                    var temp_type = results[0].types;
+                                    for ( var i = 0 ; i < temp_type.length ; i = i + 1)
+                                    {
+                                        if (temp_type[i] != "tourist_attraction" && 
+                                        temp_type[i] != "point_of_interest" && 
+                                        temp_type[i] != "establishment" )
+                                        savings4.try1[key].type = temp_type[i];
+                                        
+                                    
+                                    }
+                                    if (savings4.try1[key].type == undefined)
+                                        {
+                                            savings4.try1[key].type = "tourist_attraction";
+                                            
+                                        }
+                                
+                                        savings4.try1[key].type = savings4.try1[key].type.split('_').join(' ')
+                                  
+                                    
+                            }
+                        }
+                        catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+
+
+                        try {
+                        if (results[0].opening_hours != undefined)
+                        {
+                            if (results[0].opening_hours.open_now == true)
+                            savings4.try1[key].open = "Open"
+                                
+                        }
+                    }
+                    catch(err) {
+                        props.history.push({
+                            pathname: '/NoResults',
+                        });
+                      }
+                       
+                        
+                        if (savings4.try1[key] == undefined || savings4.try1[key] == undefined)
+                        {
+                        
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                           
+
+                        }
+
+                        //savings4.try1[key].place_id = results[0].place_id;
+                        try {
+                            savings4.try1[key].place_id = results[0].place_id;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].formatted_address != undefined)
+                            savings4.try1[key].address = results[0].formatted_address;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].photos != undefined ) 
+                        {
+                            
+                            savings4.try1[key].photoUrl = results[0].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
+                        }
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+                      
+                        
+                        
+                    }
+                })
+                
+
+
+            }
+            
+        }
+
+        //<3
+
         axios.post('/Temp.json', response.data).then(function (response) {
         a = response.data.name;
+        
         amadeus.referenceData.locations.pointsOfInterest.get({
             latitude: lat,
             longitude: lng,
             radius: 20,
             category: "NIGHTLIFE"
         }).then(function (response) {
-           
+            
+            //<3
+        savings4.try2 = response.data;
+        savings4.lat1 = lat;
+        savings4.lng1 = lng;
+        savings4.location1 = location;
+
+        ////////////////////////////
+       
+        for (let key in savings4.try2) {
+            savings4.try2[key].photoUrl = "not yet";
+            savings4.try2[key].place_id = 0;
+            savings4.try2[key].address = "";
+            savings4.try2[key].open = "Closed";
+            savings4.try2[key].type = undefined;
+            let photoName = savings4.try2[key].name;
+            var map;
+            var service;
+            var infowindow;
+            const google = window.google;
+            initMap(savings4.try2[key]);
+
+            function initMap(pointer) {
+                var sydney = new google.maps.LatLng(-33.867, 151.195);
+
+                infowindow = new google.maps.InfoWindow();
+
+                map = new google.maps.Map(
+                    document.createElement("p"), { center: sydney, zoom: 15 });
+
+
+                var request = {
+                    query: photoName,
+                    fields: ['geometry', 'place_id', 'photos', 'formatted_address', 'opening_hours','type'],
+                };
+                
+                var service = new google.maps.places.PlacesService(map);
+                service.findPlaceFromQuery(request, function (results, status) {
+                    
+                    
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+                        try {
+                            if (results[0].types != undefined)
+                            {
+                                    var temp_type = results[0].types;
+                                    for ( var i = 0 ; i < temp_type.length ; i = i + 1)
+                                    {
+                                        if (temp_type[i] != "tourist_attraction" && 
+                                        temp_type[i] != "point_of_interest" && 
+                                        temp_type[i] != "establishment" )
+                                        savings4.try2[key].type = temp_type[i];
+                                        
+                                    
+                                    }
+                                    if (savings4.try2[key].type == undefined)
+                                        {
+                                            savings4.try2[key].type = "tourist_attraction";
+                                            
+                                        }
+                                
+                                        savings4.try2[key].type = savings4.try2[key].type.split('_').join(' ')
+                                  
+                                    
+                            }
+                        }
+                        catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+
+
+                        try {
+                        if (results[0].opening_hours != undefined)
+                        {
+                            if (results[0].opening_hours.open_now == true)
+                            savings4.try2[key].open = "Open"
+                                
+                        }
+                    }
+                    catch(err) {
+                        props.history.push({
+                            pathname: '/NoResults',
+                        });
+                      }
+                       
+                        
+                        if (savings4.try2[key] == undefined || savings4.try1[key] == undefined)
+                        {
+                        
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                           
+
+                        }
+
+                        //savings4.try2[key].place_id = results[0].place_id;
+                        try {
+                            savings2.try2[key].place_id = results[0].place_id;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].formatted_address != undefined)
+                            savings4.try2[key].address = results[0].formatted_address;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].photos != undefined ) 
+                        {
+                            
+                            savings4.try2[key].photoUrl = results[0].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
+                        }
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+                      
+                        
+                        
+                    }
+                })
+                
+
+
+            }
+            
+        }
+
+        //<3
             
             axios.post('/Temp.json', response.data).then(function (response) {
             b = response.data.name;
@@ -264,6 +554,150 @@ function getNightLife(location,lat, lng, checkedSightseeing, checkedNightLife, c
         radius: 20,
         category: "NIGHTLIFE"
     }).then(function (response) {
+
+        //<3
+        savings2.try1 = response.data;
+        savings2.lat1 = lat;
+        savings2.lng1 = lng;
+        savings2.location1 = location;
+
+        ////////////////////////////
+       
+        for (let key in savings2.try1) {
+            savings2.try1[key].photoUrl = "not yet";
+            savings2.try1[key].place_id = 0;
+            savings2.try1[key].address = "";
+            savings2.try1[key].open = "Closed";
+            savings2.try1[key].type = undefined;
+            let photoName = savings2.try1[key].name;
+            var map;
+            var service;
+            var infowindow;
+            const google = window.google;
+            initMap(savings2.try1[key]);
+
+            function initMap(pointer) {
+                var sydney = new google.maps.LatLng(-33.867, 151.195);
+
+                infowindow = new google.maps.InfoWindow();
+
+                map = new google.maps.Map(
+                    document.createElement("p"), { center: sydney, zoom: 15 });
+
+
+                var request = {
+                    query: photoName,
+                    fields: ['geometry', 'place_id', 'photos', 'formatted_address', 'opening_hours','type'],
+                };
+                
+                var service = new google.maps.places.PlacesService(map);
+                service.findPlaceFromQuery(request, function (results, status) {
+                    
+                    
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+                        try {
+                            if (results[0].types != undefined)
+                            {
+                                    var temp_type = results[0].types;
+                                    for ( var i = 0 ; i < temp_type.length ; i = i + 1)
+                                    {
+                                        if (temp_type[i] != "tourist_attraction" && 
+                                        temp_type[i] != "point_of_interest" && 
+                                        temp_type[i] != "establishment" )
+                                        savings2.try1[key].type = temp_type[i];
+                                        
+                                    
+                                    }
+                                    if (savings2.try1[key].type == undefined)
+                                        {
+                                            savings2.try1[key].type = "tourist_attraction";
+                                            
+                                        }
+                                
+                                        savings2.try1[key].type = savings2.try1[key].type.split('_').join(' ')
+                                  
+                                    
+                            }
+                        }
+                        catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+
+
+                        try {
+                        if (results[0].opening_hours != undefined)
+                        {
+                            if (results[0].opening_hours.open_now == true)
+                            savings2.try1[key].open = "Open"
+                                
+                        }
+                    }
+                    catch(err) {
+                        props.history.push({
+                            pathname: '/NoResults',
+                        });
+                      }
+                       
+                        
+                        if (savings2.try1[key] == undefined || savings2.try1[key] == undefined)
+                        {
+                        
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                           
+
+                        }
+
+                        //savings2.try1[key].place_id = results[0].place_id;
+                        try {
+                            savings2.try1[key].place_id = results[0].place_id;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].formatted_address != undefined)
+                            savings2.try1[key].address = results[0].formatted_address;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].photos != undefined ) 
+                        {
+                            
+                            savings2.try1[key].photoUrl = results[0].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
+                        }
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+                      
+                        
+                        
+                    }
+                })
+                
+
+
+            }
+            
+        }
+
+        //<3
        
         
         axios.post('/Temp.json', response.data).then(function (response) {
@@ -296,6 +730,155 @@ function getResturants(location,lat, lng, checkedSightseeing, checkedNightLife, 
         radius: 20,
         category: "RESTAURANT"
     }).then(function (response) {
+
+        //<3
+
+        savings3.try1 = response.data;
+        savings3.lat1 = lat;
+        savings3.lng1 = lng;
+        savings3.location1 = location;
+
+        ////////////////////////////
+       
+        for (let key in savings3.try1) {
+            savings3.try1[key].photoUrl = "not yet";
+            savings3.try1[key].place_id = 0;
+            savings3.try1[key].address = "";
+            savings3.try1[key].open = "Closed";
+            savings3.try1[key].type = undefined;
+            let photoName = savings3.try1[key].name;
+            var map;
+            var service;
+            var infowindow;
+            const google = window.google;
+            initMap(savings3.try1[key]);
+
+            function initMap(pointer) {
+                var sydney = new google.maps.LatLng(-33.867, 151.195);
+
+                infowindow = new google.maps.InfoWindow();
+
+                map = new google.maps.Map(
+                    document.createElement("p"), { center: sydney, zoom: 15 });
+
+
+                var request = {
+                    query: photoName  + location + ' Resturant',
+                    fields: ['geometry', 'place_id', 'photos', 'formatted_address', 'opening_hours','type'],
+                };
+                
+                var service = new google.maps.places.PlacesService(map);
+                service.findPlaceFromQuery(request, function (results, status) {
+                    
+                    
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        
+
+                        try {
+                            if (results[0].types != undefined)
+                            {
+                                    var temp_type = results[0].types;
+                                    for ( var i = 0 ; i < temp_type.length ; i = i + 1)
+                                    {
+                                        if (temp_type[i] != "tourist_attraction" && 
+                                        temp_type[i] != "point_of_interest" && 
+                                        temp_type[i] != "establishment" )
+                                        savings3.try1[key].type = temp_type[i];
+                                        
+                                    
+                                    }
+                                    if (savings3.try1[key].type == undefined)
+                                        {
+                                            savings3.try1[key].type = "tourist_attraction";
+                                            
+                                        }
+                                
+                                        savings3.try1[key].type = savings3.try1[key].type.split('_').join(' ')
+                                  
+                                    
+                            }
+                        }
+                        catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+
+
+                        try {
+                        if (results[0].opening_hours != undefined)
+                        {
+                            if (results[0].opening_hours.open_now == true)
+                            savings3.try1[key].open = "Open"
+                                
+                        }
+                    }
+                    catch(err) {
+                        props.history.push({
+                            pathname: '/NoResults',
+                        });
+                      }
+                       
+                        
+                        if (savings3.try1[key] == undefined || savings3.try1[key] == undefined)
+                        {
+                        
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                           
+
+                        }
+
+                        //savings3.try1[key].place_id = results[0].place_id;
+                        try {
+                            savings3.try1[key].place_id = results[0].place_id;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].formatted_address != undefined)
+                            savings3.try1[key].address = results[0].formatted_address;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].photos != undefined ) 
+                        {
+                            
+                            savings3.try1[key].photoUrl = results[0].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
+                        }
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+                      
+                        
+                        
+                    }
+                })
+                
+
+
+            }
+            
+        }
+
+        
+
+        //<3
+
        
         
         axios.post('/Temp.json', response.data).then(function (response) {
@@ -318,18 +901,171 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
         clientSecret: "jURdf96v6iemuPBy",
         hostname: 'production',
     });
-
+    
     var that = this;
     amadeus.referenceData.locations.pointsOfInterest.get({
         latitude: lat,
         longitude: lng,
         radius: 20,
         category: "SIGHTS"
-    }).then(function (response) {
+    })
+    .then(function (response) {
        
-        
+        savings.try1 = response.data;
+        savings.lat1 = lat;
+        savings.lng1 = lng;
+        savings.location1 = location;
+
+        ////////////////////////////
+       
+        for (let key in savings.try1) {
+            savings.try1[key].photoUrl = "not yet";
+            savings.try1[key].place_id = 0;
+            savings.try1[key].address = "";
+            savings.try1[key].open = "Closed";
+            savings.try1[key].type = undefined;
+            let photoName = savings.try1[key].name;
+            var map;
+            var service;
+            var infowindow;
+            const google = window.google;
+            initMap(savings.try1[key]);
+
+            function initMap(pointer) {
+                var sydney = new google.maps.LatLng(-33.867, 151.195);
+
+                infowindow = new google.maps.InfoWindow();
+
+                map = new google.maps.Map(
+                    document.createElement("p"), { center: sydney, zoom: 15 });
+
+
+                var request = {
+                    query: photoName,
+                    fields: ['geometry', 'place_id', 'photos', 'formatted_address', 'opening_hours','type'],
+                };
+                
+                var service = new google.maps.places.PlacesService(map);
+                service.findPlaceFromQuery(request, function (results, status) {
+                    
+                    
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+                        try {
+                            if (results[0].types != undefined)
+                            {
+                                    var temp_type = results[0].types;
+                                    for ( var i = 0 ; i < temp_type.length ; i = i + 1)
+                                    {
+                                        if (temp_type[i] != "tourist_attraction" && 
+                                        temp_type[i] != "point_of_interest" && 
+                                        
+                                        temp_type[i] != "premise"  && 
+                                        temp_type[i] != "establishment" )
+                                        savings.try1[key].type = temp_type[i];
+                                        
+                                    
+                                    }
+                                    if (savings.try1[key].type == undefined)
+                                        {
+                                            savings.try1[key].type = "tourist_attraction";
+                                            
+                                        }
+                                
+                                    savings.try1[key].type = savings.try1[key].type.split('_').join(' ')
+                                  
+                                    
+                            }
+                        }
+                        catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+
+
+                        try {
+                        if (results[0].opening_hours != undefined)
+                        {
+                            if (results[0].opening_hours.open_now == true)
+                                savings.try1[key].open = "Open"
+                                
+                        }
+                    }
+                    catch(err) {
+                        props.history.push({
+                            pathname: '/NoResults',
+                        });
+                      }
+                       
+                        
+                        if (savings.try1[key] == undefined || savings.try1[key] == undefined)
+                        {
+                        
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                           
+
+                        }
+
+                        //savings.try1[key].place_id = results[0].place_id;
+                        try {
+                            savings.try1[key].place_id = results[0].place_id;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].formatted_address != undefined)
+                            savings.try1[key].address = results[0].formatted_address;
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+
+                          try {
+                            if (results[0].photos != undefined ) 
+                        {
+                            
+                            savings.try1[key].photoUrl = results[0].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
+                        }
+                          }
+                          catch(err) {
+                            props.history.push({
+                                pathname: '/NoResults',
+                            });
+                          }
+                      
+                        
+                        
+                    }
+                })
+                
+
+
+            }
+            
+        }
+
+      
+
+        ///////////////////////////
+
+
+
+
+
+
         axios.post('/Temp.json', response.data).then(function (response) {
-            changePage(location,"/ShowSightSeeing", lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants,response.data.name);
+            
+           changePage(location,"/ShowSightSeeing", lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants,response.data.name);
        
 
         }).catch(function (responseError) {
@@ -337,6 +1073,10 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
             console.log(responseError);
         });
     });
+    
+    
+    
+        
 }
 
 
@@ -405,6 +1145,7 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
         lng_original : 0,
         data : data_original,
         pointer : 0,
+     
     });
 
     const handleChange = (event) => {

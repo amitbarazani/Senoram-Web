@@ -5,6 +5,7 @@ import axios from '../../Firebase/axios';
 import Resturant from './Resturant';
 import Grid from '@material-ui/core/Grid';
 import Geocode from "react-geocode";
+import savings from '../Resturants/Savings3';
 
 
 
@@ -77,7 +78,8 @@ class ShowResturants extends Component {
    
 
     componentDidMount() {
-
+        
+        let that = this;
         let temp;
         axios.get('/Temp/' + this.state.pointer + '.json')
             .then(res => {
@@ -86,19 +88,19 @@ class ShowResturants extends Component {
                 for (let key in res.data) {
                     
                     fetchedResturants.push({
-                        ...res.data[key],
+                        ...savings.try1[key],
                         id: key + 1,
-                        address: "temp",
                         photo_reference: "temp",
-                        open_now: "temp",
+                        website: "temp",
+                        
+                        phone: "temp",
                         distance: 0,
 
                     });
                     
 
                 }
-                if (fetchedResturants.length == 0 )
-                {
+                if (savings.try1.length == 0) {
                     this.props.history.push({
                         pathname: '/NoResults',
                     });
@@ -108,52 +110,107 @@ class ShowResturants extends Component {
         
                 let i;
                 let j;
-                for (i = 0; i < fetchedResturants.length; i++) {
-                    for (j = 0; j < fetchedResturants.length; j++) {
+                for (i = 0; i < savings.try1.length; i++) {
+                    for (j = 0; j < savings.try1.length; j++) {
                         if (i != j)
-                            if (fetchedResturants[i].name == fetchedResturants[j].name)
-                                fetchedResturants.splice(i, 1);
+                            if (savings.try1[i].name == savings.try1[j].name)
+                            savings.try1.splice(i, 1);
 
                     }
                 }
-                temp = fetchedResturants;
-                this.setState({ loading: false, resturants: fetchedResturants });
+                temp = savings.try1;
+                this.setState({ loading: false, resturants: savings.try1 });
 
 
             }).then(something => {
 
-                const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-                //this.state.resturants
-                for (let key in temp) {
-                    //console.log("in");
-                    // let photoName = temp[key].name;
-                    let lat = temp[key].geoCode.latitude;
-                    let lng = temp[key].geoCode.longitude;
+                for (let key in savings.try1) {
+                   
+                    if (savings.try1[key].photoUrl == "not yet" )
+                    {
+                        savings.try1.splice(key, 1);
+                        console.log("1")
+                        this.setState({ loading: false, resturants: savings.try1 });  
+                    }
 
-                    //photoName = photoName.replace(/ /g, "%20");
-                    //console.log(photoName);
-                    let http = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=AIzaSyAlsDSqPYncPQDXhREqVsYgj6YiVGSyNMo';
+                    if (savings.try1[savings.try1.length-1].photoUrl == "not yet" )
+                    {
+                     
+                        savings.try1.splice(savings.try1.length-1, 1);
+                        console.log("1")
+                        this.setState({ loading: false, resturants: savings.try1 });  
+                    }
 
-/*
-                    //axios.get(proxyUrl + http)
-                    axios.get(proxyUrl + http)
-                        .then(res => {
-                            temp[key].address = res.data.results[0].formatted_address;
-                            // console.log (res.data.results);
-                            //temp[key].photo_reference = res.data.candidates[0].photos[0].photo_reference;
-                            //temp[key].address = res.data.candidates[0].formatted_address; 
-                            //temp[key].open_now = res.data.candidates[0].opening_hours.open_now;
-                            //console.log(this.state.resturants[key])
-                            //this.setState({ loading: false, resturants: temp });
-                            this.setState({ loading: false, resturants: temp });
-                        }).catch(err => {
-                            console.log(console.log(err));
+                    if (savings.try1[key].photoUrl.length < 15 )
+                    {
+                        savings.try1.splice(key, 1);
+                        console.log("1")
+                        this.setState({ loading: false, resturants: savings.try1 });  
+                    }
 
+
+                    this.setState({ loading: false, resturants: savings.try1 });     
+
+                }  
+
+               
+            })
+            .then(something => {
+
+                //<3//
+                console.log(that.state.resturants);
+                for (let key in that.state.resturants) {
+                    
+                    let id = that.state.resturants[key].place_id;
+                    console.log(id);
+                    var map;
+                    var service;
+                    var infowindow;
+                    const google = window.google;
+                    initMap(that.state.resturants[key]);
+        
+                    function initMap(pointer) {
+                        var sydney = new google.maps.LatLng(-33.867, 151.195);
+        
+                        infowindow = new google.maps.InfoWindow();
+        
+                        map = new google.maps.Map(
+                            document.createElement("p"), { center: sydney, zoom: 15 });
+        
+        
+                        var request = {
+                            placeId: id,
+                            fields: ['formatted_phone_number','opening_hours'],
+                        };
+                        
+                        var service = new google.maps.places.PlacesService(map);
+                        service.getDetails(request, function (results, status) {
+                            
+                            
+                            if (status == google.maps.places.PlacesServiceStatus.OK) {
+        
+                                console.log(results);
+                              
+                                
+                                
+                            }
+                            else 
+                            console.log(results);
                         })
-
-                        */
+                        
+        
+        
+                    }
+                    
                 }
-            }).then(something => { 
+
+                //<3//
+
+
+
+            })
+            
+            .then(something => { 
                 
                 for (let key in temp) {
 
@@ -200,20 +257,30 @@ class ShowResturants extends Component {
 
                 <h2 >Top Resturants In The Area</h2>
                 <Grid container justify="center">
-                    <h5  >
-                        {this.state.resturants.map(resturant => (
-
+              
+                   
+                        
+                        { 
+                        this.state.resturants.map(resturant => (
+                            <div width="50%" class="w">
                             <Resturant
                                 id={resturant.id}
                                 name={resturant.name}
                                 rank={resturant.rank}
                                 distance={resturant.distance}
+                                id={resturant.id}
+                                url= {resturant.photoUrl}
+                                type= {resturant.type}
+                                open= {resturant.open}
                             />
+                          </div>
                         ))
                         }
-                    </h5>
+                   
+                   
 
-                    
+                
+
 
 
                 </Grid>

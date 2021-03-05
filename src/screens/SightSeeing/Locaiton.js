@@ -15,11 +15,25 @@ import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+    
+    large: {
+      width: theme.spacing(15),
+      height: theme.spacing(15),
+      padding: "10px",
+    },
+    
+  }));
 
 const Location = (props) => {
 
-    
+    const classes = useStyles();
     
     return ( 
     <div>
@@ -28,9 +42,7 @@ const Location = (props) => {
 <List>
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar>
-                                <LocationOnIcon />
-                            </Avatar>
+                        
                         </ListItemAvatar>
                         <ListItemText primary={props.location} secondary = {props.name} />
                     </ListItem>
@@ -44,3 +56,8 @@ const Location = (props) => {
 
 
 export default Location;
+
+
+//<Avatar className={classes.large} >
+//LocationOnIcon className={classes.large} />
+//</Avatar>

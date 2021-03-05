@@ -23,6 +23,7 @@ import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import { indigo, pink } from '@material-ui/core/colors';
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -34,10 +35,16 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.getContrastText(indigo[500]),
       backgroundColor: indigo[500],
     },
+    large: {
+      width: theme.spacing(15),
+      height: theme.spacing(15),
+      padding: "10px",
+    },
     
   }));
 
 const Final = (props) => {
+  let help = props.url;
     const classes = useStyles();
     const string = "Distance: " + props.distance + " KM";
 
@@ -48,15 +55,27 @@ const Final = (props) => {
             <List>
         
                 <ListItem>
-               
+                
                     <ListItemAvatar>
-                        <Avatar className={classes.indigo} >
+                   
+                        <Avatar className={classes.large} src= {`${help}`}>
+                        
+                        
                             <DirectionsBoatOutlinedIcon  />
                             </Avatar> 
                        
                     </ListItemAvatar>
                   
-                    <ListItemText primary={props.name} secondary={string} />
+                    <ListItemText primary={props.name} secondary=
+                    {         
+                      <div>
+                      
+                        <b>{props.type}</b>
+                        <div> {string}</div>
+                      </div>
+                      }
+                   />
+                    
                     
                     <TimelineConnector />
 
