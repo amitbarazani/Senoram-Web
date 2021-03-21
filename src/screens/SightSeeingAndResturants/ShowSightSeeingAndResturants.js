@@ -284,4 +284,3 @@ class ShowSightSeeing extends Component {
 export default ShowSightSeeing;
 
 
-// address={resturant.address}

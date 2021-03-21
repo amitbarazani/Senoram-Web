@@ -95,8 +95,14 @@ class ShowSightSeeing extends Component {
 
     }
 
+
+    
     componentWillMount() {
 
+
+       
+        console.log("here");
+        console.log(...savings.try2);
         
         let that = this;
         let temp;
@@ -118,6 +124,7 @@ class ShowSightSeeing extends Component {
                     });
 
                 }
+                
                 if (savings.try2.length == 0 )
                 {
                     this.props.history.push({
@@ -146,21 +153,34 @@ class ShowSightSeeing extends Component {
                 
                 for (var i = 0; i < savings.try2.length; i++) {
                     if (savings.try2[i].photoUrl == "not yet" ) {
-                        savings.try2.splice(i, 1); // cache.splice(key) is working fine, ***
-                            i--;
-                        }
+
+                        console.log(savings.try2[i].photoUrl);
+                        //savings.try2.splice(i, 1); // cache.splice(key) is working fine, ***
+                           // i--;
+                            //console.log("158");
+                           
+
+                    
+                    }   
+                  
                     }
                     this.setState({ loading: false, resturantsB: savings.try2 }); 
+
+
+
+
+
+                   
                   
 
             }).then(something => {
 
                 //<3//
-                console.log(that.state.resturantsB);
+                //console.log(that.state.resturantsB);
                 for (let key in that.state.resturantsB) {
                     
                     let id = that.state.resturantsB[key].place_id;
-                    console.log(id);
+                    //console.log(id);
                     var map;
                     var service;
                     var infowindow;
@@ -187,13 +207,14 @@ class ShowSightSeeing extends Component {
                             
                             if (status == google.maps.places.PlacesServiceStatus.OK) {
         
-                                console.log(results);
+                                //console.log(results);
                               
                                 
                                 
                             }
                             else 
-                            console.log(results);
+                            var chen = "you can do it";
+                            //console.log(results);
                         })
                         
         
@@ -228,7 +249,7 @@ class ShowSightSeeing extends Component {
                 
             
             })
-//
+
             .then(something => { 
                 
                 for (let i = 0; i < savings.try2.length; i++) {
@@ -236,7 +257,7 @@ class ShowSightSeeing extends Component {
                             if (savings.try2[i].photoUrl == "not yet")
                             {
                                 savings.try2.splice(i, 1);
-                                console.log("2")
+                                //console.log("2")
                                 i--;
                                 this.setState({ loading: false, resturantsB: savings.try2 });     
                             }
@@ -318,7 +339,7 @@ class ShowSightSeeing extends Component {
                     {
                      
                         savings.try1.splice(key, 1);
-                        console.log("1")
+                        //console.log("1")
                         this.setState({ loading: false, resturants: savings.try1 });  
                     }
 
@@ -326,7 +347,7 @@ class ShowSightSeeing extends Component {
                     {
                      
                         savings.try1.splice(savings.try1.length-1, 1);
-                        console.log("1")
+                        //console.log("1")
                         this.setState({ loading: false, resturants: savings.try1 });  
                     }
 
@@ -335,7 +356,7 @@ class ShowSightSeeing extends Component {
                     {
                           
                         savings.try1.splice(key, 1);
-                        console.log("1")
+                        //console.log("1")
                         this.setState({ loading: false, resturants: savings.try1 });  
                     }
 
@@ -347,11 +368,11 @@ class ShowSightSeeing extends Component {
             }).then(something => {
 
                 //<3//
-                console.log(that.state.resturants);
+                //console.log(that.state.resturants);
                 for (let key in that.state.resturants) {
                     
                     let id = that.state.resturants[key].place_id;
-                    console.log(id);
+                    //console.log(id);
                     var map;
                     var service;
                     var infowindow;
@@ -378,13 +399,14 @@ class ShowSightSeeing extends Component {
                             
                             if (status == google.maps.places.PlacesServiceStatus.OK) {
         
-                                console.log(results);
+                               // console.log(results);
                               
                                 
                                 
                             }
                             else 
-                            console.log(results);
+                            var chen = "you can do it";
+                            //console.log(results);
                         })
                         
         
@@ -424,8 +446,8 @@ class ShowSightSeeing extends Component {
                 let minT = this.state.resturants.length;
                 let minT2 = this.state.resturantsB.length;
                 let real_min = Math.min(minT,minT2);
-                this.setState({ loading: false, resturants: this.state.resturants.splice(0,real_min) });
-                this.setState({ loading: false, resturantsB: this.state.resturantsB.splice(0,real_min) });
+                //this.setState({ loading: false, resturants: this.state.resturants.splice(0,real_min) });
+                //this.setState({ loading: false, resturantsB: this.state.resturantsB.splice(0,real_min) });
 
                 
                 
@@ -438,7 +460,7 @@ class ShowSightSeeing extends Component {
                             if (savings.try1[i].photoUrl == "not yet")
                             {
                                 savings.try1.splice(i, 1);
-                                console.log("2")
+                              //  console.log("2")
                                 this.setState({ loading: false, resturants: savings.try1 });     
                             }
                                 
@@ -507,9 +529,9 @@ class ShowSightSeeing extends Component {
                         ))
                         }
                     </h5>
-               
+             
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+               
                     <h5  >
                     <h4 >Choose Night Life </h4>
                     { 

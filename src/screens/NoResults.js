@@ -14,7 +14,7 @@ const NoResults = (props) => {
      
             <Grid container justify="center">
                 <h2>
-                   No Results Found 
+                   Somthing Went Wrong
                 </h2>
 
                 
@@ -24,7 +24,7 @@ const NoResults = (props) => {
                          props.history.push({
                             pathname: '/Input',
                         });
-                    }} > Try again! </Button>
+                    }} > Try Again! </Button>
 
 
         </div>

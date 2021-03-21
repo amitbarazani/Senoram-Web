@@ -22,7 +22,8 @@ import Button from '@material-ui/core/Button';
 import { NightLifeChecked} from './Count';
 import { sightsChecked } from './Count';
 import { sightsSeeing } from './Count';
-import { nights } from './Count';
+import { nights } from './Count'; 
+import savings from './Savings4';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,26 +67,52 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 class FinalTrack extends Component {
 
 
-
-
-
-
-
-    //classes = useStyles();
-
     state = {
         sights: [],
         ending: 0,
-        location: this.props.location.dataToSend.location,
+        location: this.props.location.dataToSend1//"London",
     }
     constructor(props) {
         super(props);
 
     }
 
-
-
     componentDidMount() {
+
+     console.log(this.state.sights);
+
+    if (sightsSeeing.length >=1 && nights.length >= 1)
+    {
+        for(var i = 0 ; i < this.state.sights.length ; i ++ )
+    {
+    
+        if ( this.state.sights[i].c == "Night Life") 
+        {
+        
+  
+            var temp = this.state.sights;
+            temp[i].c = "Sight Seeing";
+            this.setState({ sights: temp});
+
+        }
+
+        if ( this.state.sights[i].c == undefined)
+        {
+          
+            var temp = this.state.sights;
+            temp[i].c = "Night Life";
+            this.setState({ sights: temp});
+        }
+    }
+
+    }    
+    
+
+    }
+
+    componentWillMount() {
+
+       
 
         // Just 1 SightSeeing
         if (nights.length == 0 && sightsSeeing.length == 1)
@@ -1416,11 +1443,12 @@ class FinalTrack extends Component {
         
     }
     
-    
+   
     
       
 
     }
+
 
 
 
@@ -1434,7 +1462,9 @@ class FinalTrack extends Component {
                 <Grid container justify="center">
                     <h5>
                         <h1>Trip Plan</h1>
-                        <Location location={this.state.location} name="Starting Point" />
+                     
+                        <p>{this.state.location} </p>
+                        <p>Starting Point</p>
                         {this.state.sights.map(element => (
 
                             <Final
@@ -1442,12 +1472,16 @@ class FinalTrack extends Component {
                                 name={element.name}
                                 rank={element.rank}
                                 distance={element.distance}
+                                url= {element.photoUrl}
+                                type= {element.type}
                                 c={element.c}
 
                             />
                         ))
                         }
-                        <Location location={this.state.location} name={this.state.ending} />
+                        
+                        <p>{this.state.location} </p>
+                        <p>{this.state.ending} </p>
                     </h5>
                     
 

@@ -6,6 +6,7 @@ class Savings extends Component {
 
     render() {
         let try1 = [];
+        let tryChen = [];
         let lat1 = 0;
         let lng1 = 0;
         let location1 = "";

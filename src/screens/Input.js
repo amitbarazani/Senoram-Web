@@ -11,6 +11,7 @@ import savings from './SightSeeing/Savings';
 import savings2 from './NightLife/Savings2';
 import savings3 from './Resturants/Savings3';
 import savings4 from './SightSeeingAndNightLife/Savings4';
+import Unsplash, { toJson } from "unsplash-js";
 
 const useStyles = makeStyles({
     sliderWidth: {
@@ -227,6 +228,7 @@ function getSightSeeingAndNightLife (location,lat, lng, checkedSightseeing, chec
             savings4.try1[key].address = "";
             savings4.try1[key].open = "Closed";
             savings4.try1[key].type = undefined;
+            savings4.try1[key].location = location;
             let photoName = savings4.try1[key].name;
             var map;
             var service;
@@ -381,6 +383,7 @@ function getSightSeeingAndNightLife (location,lat, lng, checkedSightseeing, chec
             savings4.try2[key].address = "";
             savings4.try2[key].open = "Closed";
             savings4.try2[key].type = undefined;
+            savings4.try2[key].location = location;
             let photoName = savings4.try2[key].name;
             var map;
             var service;
@@ -894,7 +897,8 @@ function getResturants(location,lat, lng, checkedSightseeing, checkedNightLife, 
 
 function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants) {
 
-    
+  
+      
     const Amadeus = require("amadeus");
     const amadeus = new Amadeus({
         clientId: "UNsEf8gOfR76Xk4hIFdbREVwPHRQFdyk",
@@ -917,9 +921,34 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
         savings.location1 = location;
 
         ////////////////////////////
-       
+
+        
+        const unsplash = new Unsplash({
+            accessKey: "e8G_4rvS91r0Jvd70eCKkvbp4vl0zTdeMK95lOek76Q",
+           
+          
+          });
+
         for (let key in savings.try1) {
-            savings.try1[key].photoUrl = "not yet";
+
+            let photoName = savings.location1.location + " " +  savings.try1[key].name;
+            photoName = photoName.replace(/%20/g, " ");
+            console.log(photoName);
+
+        
+
+            unsplash.search.photos(photoName).then(toJson).then((json) => {
+            //console.log(json.results[0].urls.full);
+            savings.try1[key].photoUrl = json.results[0].urls.small;
+             });
+
+
+
+
+        }
+        /*
+        for (let key in savings.try1) {
+            savings.try1[key].photoUrl = "not yet"; //'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
             savings.try1[key].place_id = 0;
             savings.try1[key].address = "";
             savings.try1[key].open = "Closed";
@@ -942,7 +971,7 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
 
                 var request = {
                     query: photoName,
-                    fields: ['geometry', 'place_id', 'photos', 'formatted_address', 'opening_hours','type'],
+                    fields: ['geometry', 'place_id', 'photos', 'formatted_address', 'opening_hours','type',"icon"],
                 };
                 
                 var service = new google.maps.places.PlacesService(map);
@@ -950,6 +979,9 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
                     
                     
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+                        console.log(results[0]);
+                        
 
                         try {
                             if (results[0].types != undefined)
@@ -1054,18 +1086,18 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
             
         }
 
-      
+      */
 
         ///////////////////////////
 
 
 
 
-
+     
 
         axios.post('/Temp.json', response.data).then(function (response) {
             
-           changePage(location,"/ShowSightSeeing", lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants,response.data.name);
+          changePage(location,"/ShowSightSeeing", lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants,response.data.name);
        
 
         }).catch(function (responseError) {

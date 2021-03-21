@@ -76,6 +76,19 @@ class ShowResturants extends Component {
     }
 
    
+    componentWillMount() {
+
+        if (savings.try1.length == 0) {
+            console.log("ERROR");
+            
+            this.props.history.push({
+                pathname: '/NoResults',
+            });
+            
+
+        }
+    }
+
 
     componentDidMount() {
         

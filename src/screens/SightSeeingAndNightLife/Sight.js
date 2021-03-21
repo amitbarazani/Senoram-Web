@@ -141,6 +141,7 @@ const Sight = (props) => {
 
       <CardContent>
       <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography>Distance: {props.distance} KM </WhiteTextTypography> </Typography>
+      <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography>Rating: {props.rank} </WhiteTextTypography> </Typography>
         <Typography  variant="h6" component="h2"> <WhiteTextTypography2> {props.name} </WhiteTextTypography2></Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography> {props.type} </WhiteTextTypography> </Typography>
        

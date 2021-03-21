@@ -10,6 +10,7 @@ class Savings extends Component {
         let lat1 = 0;
         let lng1 = 0;
         let location1 = "";
+        let both = [] // SightSeeing + NightLife
 
         return(
             <div>

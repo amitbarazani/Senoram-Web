@@ -134,6 +134,19 @@ class ShowSightSeeing extends Component {
 
     }
 
+    componentWillMount() {
+
+        if (savings.try1.length == 0) {
+            console.log("ERROR");
+            
+            this.props.history.push({
+                pathname: '/NoResults',
+            });
+            
+
+        }
+    }
+
 
 
     componentDidMount() {
@@ -141,6 +154,7 @@ class ShowSightSeeing extends Component {
        
         let that = this;
         let temp;
+        
         axios.get('/Temp/' + this.state.pointer + '.json')
             .then(res => {
 
@@ -161,9 +175,12 @@ class ShowSightSeeing extends Component {
 
                 }
                 if (savings.try1.length == 0) {
+                    console.log("ERROR");
+                    
                     this.props.history.push({
                         pathname: '/NoResults',
                     });
+                    
 
                 }
                 let i;
@@ -224,7 +241,8 @@ class ShowSightSeeing extends Component {
             }).then(something => {
 
                 //<3//
-                console.log(that.state.resturants);
+            
+                
                 for (let key in that.state.resturants) {
                     
                     let id = that.state.resturants[key].place_id;
@@ -260,8 +278,17 @@ class ShowSightSeeing extends Component {
                                 
                                 
                             }
-                            else 
-                            console.log(results);
+                            else
+                            {
+                             
+                                //that.setState({ loading: false, resturants: that.state.resturants.splice(key, 1) });  
+                                
+                                console.log("hi8"); 
+                                //console.log(that.state.resturants.length);
+                                console.log(results); 
+                                console.log("hi8"); 
+                            } 
+                            
                         })
                         
         
@@ -312,7 +339,8 @@ class ShowSightSeeing extends Component {
                             
                             if (savings.try1.length == 0)
                             {
-                                
+                                console.log("ERRORRR");
+                               
                                 this.props.history.push({
                                     pathname: '/NoResults',
                                 });

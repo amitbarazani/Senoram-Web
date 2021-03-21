@@ -25,12 +25,11 @@ const Location = (props) => {
     <div>
 
 
+
 <List>
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar>
-                                <LocationOnIcon />
-                            </Avatar>
+                        
                         </ListItemAvatar>
                         <ListItemText primary={props.location} secondary = {props.name} />
                     </ListItem>

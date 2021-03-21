@@ -5,6 +5,14 @@ import Input from './screens/Input';
 import Resturant from "./screens/Resturants/Resturant";
 import DataSent from './screens/DataSent';
 import ShowSightSeeing from './screens/SightSeeing/ShowSightSeeing';
+
+import ShowSightSeeing2 from './screens/SightSeeing/ShowSightSeeing2';
+import Input2 from './screens/Input2';
+import ShowNightLife2 from './screens/NightLife/ShowSightSeeing2';
+import ShowResturants2 from "./screens/Resturants/ShowResturants2";
+import ShowSightSeeingAndNightLife2 from './screens/SightSeeingAndNightLife/ShowSightSeeingAndNightLife2';
+import ShowSightSeeingAndNightLife22 from './screens/SightSeeingAndNightLife/ShowSightSeeingAndNightLife22';
+
 import FinalTrackSightSeeing from './screens/SightSeeing/FinalTrack';
 import NoResults from './screens/NoResults';
 import FinalTrackNightLife from './screens/NightLife/FinalTrack';
@@ -26,6 +34,15 @@ class App extends Component {
         <Switch>
        
         <Route path="/ShowResturants" component={ShowResturants} />
+
+        <Route path="/ShowSightSeeing2" component={ShowSightSeeing2} />
+        <Route path="/Input2" component={Input2} />
+        <Route path="/ShowNightLife2" component={ShowNightLife2} />
+        <Route path="/ShowResturants2" component={ShowResturants2} />
+        <Route path="/ShowSightSeeingAndNightLife2" component={ShowSightSeeingAndNightLife2} />
+        <Route path="/ShowSightSeeingAndNightLife22" component={ShowSightSeeingAndNightLife22} />
+        
+
         <Route path="/ShowSightSeeingAndResturantsAndNightLife" component={ShowSightSeeingAndResturantsAndNightLife} />
         <Route path="/FinalTrackSightSeeingAndResturantsAndNightLife" component={FinalTrackSightSeeingAndResturantsAndNightLife} />
         <Route path="/FinalTrackSightSeeingAndResturants" component={FinalTrackSightSeeingAndResturants} />
