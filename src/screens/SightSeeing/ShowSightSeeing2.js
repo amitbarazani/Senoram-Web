@@ -295,7 +295,7 @@ class ShowSightSeeing extends Component {
                           console.log("hiiiiiii");
                           console.log(savings.try1);
                           if (savings.try1.length % 2 == 0)
-                          {//////////
+                          {//
                               //that.setState({ resturants: savings.try1.splice(0, savings.try1.length-2)});
                               console.log("hiiiiiii");
                           }
