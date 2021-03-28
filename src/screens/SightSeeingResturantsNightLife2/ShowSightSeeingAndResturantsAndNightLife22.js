@@ -391,7 +391,7 @@ render() {
                    let b = this.props.location.b;
                    
                     this.props.history.push({
-                        pathname: '/FinalTrackSightSeeingAndNightLife',
+                        pathname: '/FinalTrackSightSeeingAndResturantsAndNightLife',
                         dataToSend1,
                         a,
                         b,

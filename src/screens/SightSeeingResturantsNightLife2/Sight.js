@@ -14,41 +14,38 @@ import { count } from './Count';
 import { up } from  './Count';
 import { down } from  './Count';
 import { sightsChecked } from  './Count';
-import lightblue from "@material-ui/core/colors";
-import Grid from '@material-ui/core/Grid';
-//import './photo.css';
 
 const WhiteTextTypography = withStyles({
-    root: {
-      "fontFamily": "Calibri Light",
-      color: "#303030",
-      
-      
-      
-      //color: "#FFFFFF",
-    }
-  })(Typography);
+  root: {
+    "fontFamily": "Calibri Light",
+    color: "#303030",
+    
+    
+    
+    //color: "#FFFFFF",
+  }
+})(Typography);
 
-  
-  const WhiteTextTypography3 = withStyles({
-    root: {
-      "fontFamily": "Calibri Light",
-      "fontSize": 15,
-      color: "#303030",
-      "font-weight": "bold",
-     
-      //color: "#FFFFFF",
-    }
-  })(Typography);  
-  const WhiteTextTypography2 = withStyles({
-    root: {
-      "fontFamily": "Calibri Light",
-      "fontSize": 30,
-      
-      //color: "#002984",
-     
-    }
-  })(Typography);
+
+const WhiteTextTypography3 = withStyles({
+  root: {
+    "fontFamily": "Calibri Light",
+    "fontSize": 15,
+    color: "#303030",
+    "font-weight": "bold",
+   
+    //color: "#FFFFFF",
+  }
+})(Typography);  
+const WhiteTextTypography2 = withStyles({
+  root: {
+    "fontFamily": "Calibri Light",
+    "fontSize": 30,
+    
+    //color: "#002984",
+   
+  }
+})(Typography);
   
   
  
@@ -76,9 +73,8 @@ const useStyles = makeStyles({
 
 const Sight = (props) => {
 
+    
   let help = props.url;
-  
- 
     const [state, setState] = React.useState({
       checkedB: false,
     });
@@ -139,14 +135,13 @@ const Sight = (props) => {
     return ( 
     <div>
 
-
 <Card className={classes.root} variant="outlined"  style={{backgroundColor: "#D3D3D3"}}> 
 
 <img src={`${help}`} className="photo" />
 
       <CardContent>
       <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography>Distance: {props.distance} KM </WhiteTextTypography> </Typography>
-      <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography>Rating: {props.rank}  </WhiteTextTypography> </Typography>
+      <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography>Rating: {props.rank} </WhiteTextTypography> </Typography>
         <Typography  variant="h6" component="h2"> <WhiteTextTypography2> {props.name} </WhiteTextTypography2></Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>  <WhiteTextTypography> {props.type} </WhiteTextTypography> </Typography>
        
@@ -171,10 +166,9 @@ const Sight = (props) => {
       </CardContent>
     
     </Card>
-   
 
-      
     &nbsp;
+
         
 
     </div>

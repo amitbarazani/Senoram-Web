@@ -12,6 +12,9 @@ import savings2 from './NightLife/Savings2';
 import savings3 from './Resturants/Savings3';
 import savings4 from './SightSeeingAndNightLife/Savings4';
 import Unsplash, { toJson } from "unsplash-js";
+import logo from  './logo_Royal.jpeg';
+import ship from './ship.jpeg';
+import Card from '@material-ui/core/Card';
 
 const useStyles = makeStyles({
     sliderWidth: {
@@ -19,6 +22,13 @@ const useStyles = makeStyles({
         padding: "25px"
     }
 });
+
+
+const style ={
+    
+    width: '50%',
+    position: 'center',
+}
 
 
 const Input = (props) => { 
@@ -92,6 +102,13 @@ if (checkedSightseeing === true && checkedNightLife === false && checkedRestaura
     getSightSeeingAndResturants(location,lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants);
 
 }
+
+// NightLife AND Resturants
+if (checkedSightseeing === false && checkedNightLife === true && checkedRestaurants === true) {
+  
+    getNightLifeAndResturants(location,lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants);
+
+}
 // Sight Seeing AND Resturants AND Night Life
 if (checkedSightseeing === true && checkedNightLife === true && checkedRestaurants === true) {
   
@@ -100,6 +117,13 @@ if (checkedSightseeing === true && checkedNightLife === true && checkedRestauran
 }
 }
 
+function getSightSeeingAndResturantsAndNightLife(location,lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants) {
+    changePage2(location,"/ShowSightSeeingAndResturantsAndNightLife", lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants,"nothing","nothing");
+
+
+}
+
+/*
 function getSightSeeingAndResturantsAndNightLife(location,lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants) {
 
     const Amadeus = require("amadeus");
@@ -155,41 +179,21 @@ function getSightSeeingAndResturantsAndNightLife(location,lat, lng, checkedSight
     
 
 }
+*/
 
 
+function getNightLifeAndResturants(location,lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants) {
 
+    changePage(location,"/ShowNightLifeAndResturants", lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants,"nothing");
 
+}
 
 
 
 function getSightSeeingAndResturants(location,lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants) {
 
-    
-    const Amadeus = require("amadeus");
-    const amadeus = new Amadeus({
-        clientId: "UNsEf8gOfR76Xk4hIFdbREVwPHRQFdyk",
-        clientSecret: "jURdf96v6iemuPBy",
-        hostname: 'production',
-    });
+    changePage(location,"/ShowSightSeeingAndResturants", lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants,"nothing");
 
-    var that = this;
-    amadeus.referenceData.locations.pointsOfInterest.get({
-        latitude: lat,
-        longitude: lng,
-        radius: 20,
-        category: "SIGHTS"
-    }).then(function (response) {
-       
-        
-        axios.post('/Temp.json', response.data).then(function (response) {
-            changePage(location,"/ShowSightSeeingAndResturants", lat, lng, checkedSightseeing, checkedNightLife, checkedRestaurants,response.data.name);
-       
-
-        }).catch(function (responseError) {
-            alert("TO DO");
-            console.log(responseError);
-        });
-    });
 }
 
 
@@ -296,84 +300,109 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
 
 
     return (
-        <div>
-            <h2> Trip Planner </h2>
+        <div style={{ 
+            backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
 
-            <form noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Where are you traveling to?" variant="outlined" onChange={event => {
-                    const newLocation = event.target.value;
-                    setLocation(prevInputState => ({
-                        location: newLocation,
-                    }));
-                }} />
-            </form>
+                                
+       <img src={logo}   style={{ 
+     padding: '30px '}}/>
 
-            <p><b> Sight Seeing </b></p>
-
-            <Grid container justify="center">
-
-                <div className={classes.sliderWidth}>
-                    <Switch
-                        checked={state.checkedSightseeing}
-                        onChange={handleChange}
-                        color="primary"
-                        name="checkedSightseeing"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />
-                </div>
-            </Grid>
-
-
-            <p><b> Night Life </b></p>
-            <Grid container justify="center">
-                <div className={classes.sliderWidth}>
-                    <Switch
-                        checked={state.checkedNightLife}
-                        onChange={handleChange}
-                        color="primary"
-                        name="checkedNightLife"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />
-                </div>
-            </Grid>
-
-
-            <p><b> Restaurants </b></p>
-            <Grid container justify="center">
-                <div className={classes.sliderWidth}>
-                    <Switch
-                        checked={state.checkedRestaurants}
-                        onChange={handleChange}
-                        color="primary"
-                        name="checkedRestaurants"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />
-                </div>
-            </Grid>
-
-
-            <h2></h2>
-           
+<Grid
+  container
+  spacing={0}
+  direction="column"
+  alignItems="center"
+  justify="center"
  
+ >
 
-
-            <Button variant="contained" color="primary" onClick={ async () => {
-
-                convertNameLocationToLatAndLong(location, state.checkedSightseeing, state.checkedNightLife, state.checkedRestaurants);
-               /*setData(prevInputState => ({
-                    data_original: got_back,
-                   
-                }));
-                */
+<Card style={style}>
+                <br></br>
                
+
+<form noValidate autoComplete="off">
+    <TextField id="outlined-basic" label="Where are you traveling to?" variant="outlined" onChange={event => {
+        const newLocation = event.target.value;
+        setLocation(prevInputState => ({
+            location: newLocation,
+        }));
+    }} />
+</form>
+<br></br>
+
+<p><b> Sight Seeing </b></p>
+
+<Grid container justify="center">
+
+    <div className={classes.sliderWidth}>
+        <Switch
+            checked={state.checkedSightseeing}
+            onChange={handleChange}
+            color="primary"
+            name="checkedSightseeing"
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+        />
+    </div>
+</Grid>
+
+
+<p><b> Night Life </b></p>
+<Grid container justify="center">
+    <div className={classes.sliderWidth}>
+        <Switch
+            checked={state.checkedNightLife}
+            onChange={handleChange}
+            color="primary"
+            name="checkedNightLife"
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+        />
+    </div>
+</Grid>
+
+
+<p><b> Restaurants </b></p>
+<Grid container justify="center">
+    <div className={classes.sliderWidth}>
+        <Switch
+            checked={state.checkedRestaurants}
+            onChange={handleChange}
+            color="primary"
+            name="checkedRestaurants"
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+        />
+    </div>
+</Grid>
+
+
+<h2></h2>
+
+
+
+
+<Button variant="contained" color="primary" onClick={ async () => {
+
+    convertNameLocationToLatAndLong(location, state.checkedSightseeing, state.checkedNightLife, state.checkedRestaurants);
+   /*setData(prevInputState => ({
+        data_original: got_back,
+       
+    }));
+    */
+   
+
+}} > Plan Me a Trip! </Button>
+
+
+
+
+<h2></h2>
+
+                   
+                    <br></br>
+                    </Card>
+
+                    </Grid>
+
             
-            }} > Go! </Button>
-
-
-
-            
-            <h2></h2>
-
           
         
 

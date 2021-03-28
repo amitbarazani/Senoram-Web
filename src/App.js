@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
+
 import ShowResturants from "./screens/Resturants/ShowResturants";
 import { BrowserRouter, Route, Switch  } from "react-router-dom";
 import Input from './screens/Input';
@@ -12,6 +14,10 @@ import ShowNightLife2 from './screens/NightLife/ShowSightSeeing2';
 import ShowResturants2 from "./screens/Resturants/ShowResturants2";
 import ShowSightSeeingAndNightLife2 from './screens/SightSeeingAndNightLife/ShowSightSeeingAndNightLife2';
 import ShowSightSeeingAndNightLife22 from './screens/SightSeeingAndNightLife/ShowSightSeeingAndNightLife22';
+import ShowNightLifeAndResturants from './screens/NightLifeAndResturants/ShowNightLifeAndResturants';
+import FinalTrackNightLifeAndResturants from './screens/NightLifeAndResturants/FinalTrackNightLifeAndResturants';
+import ShowSightSeeingAndResturantsAndNightLife from './screens/SightSeeingResturantsNightLife2/ShowSightSeeingAndResturantsAndNightLife';
+import ShowSightSeeingAndResturantsAndNightLife2 from './screens/SightSeeingResturantsNightLife2/ShowSightSeeingAndResturantsAndNightLife22';
 
 import FinalTrackSightSeeing from './screens/SightSeeing/FinalTrack';
 import NoResults from './screens/NoResults';
@@ -21,14 +27,28 @@ import ShowSightSeeingAndNightLife from './screens/SightSeeingAndNightLife/ShowS
 import FinalTrackSightSeeingAndNightLife from './screens/SightSeeingAndNightLife/FinalTrackSightSeeingAndNightLife';
 import ShowSightSeeingAndResturants from './screens/SightSeeingAndResturants/ShowSightSeeingAndResturants';
 import FinalTrackSightSeeingAndResturants from './screens/SightSeeingAndResturants/FinalTrackSightSeeingAndResturants';
-import FinalTrackSightSeeingAndResturantsAndNightLife from './screens/SightsResturantsNight/FinalTrackSightSeeingAndResturantsAndNightLife';
-import ShowSightSeeingAndResturantsAndNightLife from './screens/SightsResturantsNight/ShowSightSeeingAndResturantsAndNightLife';
+import FinalTrackSightSeeingAndResturantsAndNightLife from './screens/SightSeeingResturantsNightLife2/FinalTrackSightSeeingAndResturantsAndNightLife';
+
+import MenuClient from './screens/MenuPage/MenuClient';
+import HomePage from './screens/HomePage/HomePage';
+import Login from './screens/ToolBar/Login';
+import SignUp from './screens/ToolBar/SignUp';
+import passwordReset from './screens/ToolBar/PasswordReset';
+import Profile from './screens/Profile/Profile';
+
+
 class App extends Component {
+
+  
 
   
   render() {
     return (
+
+     
+  
       <BrowserRouter>
+   
       <div className="App">
         <div className="App-header">
         <Switch>
@@ -41,9 +61,11 @@ class App extends Component {
         <Route path="/ShowResturants2" component={ShowResturants2} />
         <Route path="/ShowSightSeeingAndNightLife2" component={ShowSightSeeingAndNightLife2} />
         <Route path="/ShowSightSeeingAndNightLife22" component={ShowSightSeeingAndNightLife22} />
-        
-
+        <Route path="/ShowNightLifeAndResturants" component={ShowNightLifeAndResturants} />
+        <Route path="/FinalTrackNightLifeAndResturants" component={FinalTrackNightLifeAndResturants} />
         <Route path="/ShowSightSeeingAndResturantsAndNightLife" component={ShowSightSeeingAndResturantsAndNightLife} />
+        <Route path="/ShowSightSeeingAndResturantsAndNightLife2" component={ShowSightSeeingAndResturantsAndNightLife2} />
+      
         <Route path="/FinalTrackSightSeeingAndResturantsAndNightLife" component={FinalTrackSightSeeingAndResturantsAndNightLife} />
         <Route path="/FinalTrackSightSeeingAndResturants" component={FinalTrackSightSeeingAndResturants} />
         <Route path="/ShowSightSeeingAndResturants" component={ShowSightSeeingAndResturants} />
@@ -57,12 +79,22 @@ class App extends Component {
         <Route path="/NoResults" component={NoResults} />
         <Route path="/ShowNightLife" component={ShowNightLife} />
         <Route path="/FinalTrackNightLife" component={FinalTrackNightLife} />
-       
+
+        <Route path="/MenuClient" component={MenuClient} />
+        <Route path="/HomePage" component={HomePage} />
+        <Route path="/Login" component={Login} />
+        <Route path="/SignUp" component={SignUp} />
+        <Route path="/passwordReset" component={passwordReset} />
+        <Route path="/Profile" component={Profile} />
+
+
         </Switch>
        
           </div>
       </div>
+
       </BrowserRouter>
+    
     );
   }
 }

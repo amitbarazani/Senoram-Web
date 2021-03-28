@@ -9,11 +9,12 @@ import { sightsChecked } from './Count';
 import { actuallSightsChecked } from './Count';
 import { lng_sight } from './Count';
 import { lan_sight } from './Count';
-import logo from  '../logo_Royal.jpeg';
-import ship from '../ship.jpeg';
+
+
 
 //import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import savings from './Savings';
+
 
 function distance(lat1, lon1, lat2, lon2, unit) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
@@ -148,7 +149,7 @@ class ShowSightSeeing extends Component {
         latitude: that.state.lat_to_pass,
         longitude: that.state.lng_to_pass,
         radius: 20,
-        category: "SIGHTS"
+        category: "NIGHTLIFE"
     })
     .then(function (response) {
        
@@ -292,14 +293,6 @@ class ShowSightSeeing extends Component {
                           }
                       
                           that.setState({ loading: false, resturants: savings.try1 });
-                          console.log("hiiiiiii");
-                          console.log(savings.try1);
-                          if (savings.try1.length % 2 == 0)
-                          {
-                              //that.setState({ resturants: savings.try1.splice(0, savings.try1.length-2)});
-                              console.log("hiiiiiii");
-                          }
-                          
                         
                     }
                 })
@@ -323,7 +316,6 @@ class ShowSightSeeing extends Component {
         temp[key].distance = t;
     }
     that.setState({ loading: false, resturants: mergeSort(that.state.resturants) });
-    
 
 })
 
@@ -332,7 +324,6 @@ class ShowSightSeeing extends Component {
 
 
     that.setState({ loading: false, resturants: mergeSort(that.state.resturants) });
-  
 
 
 })
@@ -350,17 +341,7 @@ class ShowSightSeeing extends Component {
 }
 
 
-      
-
-      
-    
-
-
-
-
-
-
-
+ 
 
 
     render() {
@@ -373,84 +354,80 @@ class ShowSightSeeing extends Component {
 
 
 
-            <div>
+            <div >
+
+<h2 >Top Night Life In The Area</h2>
                
-               <img src={logo}   style={{ 
-     padding: '30px '}}/>
+               <h4 >Choose Up to 4 atractions </h4>
                
+               <Grid container justify="center">
+             
+                  
+                       
+                       { 
+                       this.state.resturants.map(resturant => (
+                           <div width="50%" class="w">
+                           <Sight
+                               id={resturant.id}
+                               name={resturant.name}
+                               rank={resturant.rank}
+                               distance={resturant.distance}
+                               id={resturant.id}
+                               url= {resturant.photoUrl}
+                               type= {resturant.type}
+                               open= {resturant.open}
+                           />
+                         </div>
+                       ))
+                       }
+                  
+                  
+
                
-                <h2 >Top Sight Seeing In The Area</h2>
-               
-                <h4 >Choose Up to 4 atractions </h4>
-                
-                <Grid container justify="center">
-              
-                   
-                        
-                        { 
-                        this.state.resturants.map(resturant => (
-                            <div width="50%" class="w">
-                            <Sight
-                                id={resturant.id}
-                                name={resturant.name}
-                                rank={resturant.rank}
-                                distance={resturant.distance}
-                                id={resturant.id}
-                                url= {resturant.photoUrl}
-                                type= {resturant.type}
-                                open= {resturant.open}
-                            />
-                          </div>
-                        ))
-                        }
-                   
-                   
-
-                
 
 
 
-                </Grid>
-
+               </Grid>
                 <Button variant="contained" color="primary" onClick={async () => {
 
-                    if (count <= 0) {
-                        alert("Please select at least 1 activity")
+                      if ( count <= 0)
+                      {
+                          alert("Please select at least 1 activity")
 
-                    }
+                      }
                     else {
                         //console.log(sightsChecked);
-                        for (var i = 0; i < sightsChecked.length; i++) {
-                            for (var j = 0; j < this.state.resturants.length; j++) {
-                                if (sightsChecked[i] === this.state.resturants[j].id) {
+                        for( var i = 0; i < sightsChecked.length; i++){ 
+                            for( var j = 0; j < this.state.resturants.length; j++){
+                            if ( sightsChecked[i] === this.state.resturants[j].id) {
 
-                                    actuallSightsChecked.push(this.state.resturants[j]);
-                                    //sightsChecked.splice(i, 1); 
-                                }
-
+                                actuallSightsChecked.push(this.state.resturants[j]);
+                              //sightsChecked.splice(i, 1); 
                             }
+                        
                         }
-                        let dataToSend = this.props.location.location;
-                        let a = this.state.lat_to_pass;
-                        let b = this.state.lng_to_pass;
-                        this.props.history.push({
-                            pathname: '/FinalTrackSightSeeing',
-                            dataToSend,
-                            a,
-                            b,
-
-
-
-                        });
-
-
-
+                    }
+                            let dataToSend = this.props.location.location;
+                            let a = this.state.lat_to_pass;
+                            let b = this.state.lng_to_pass;
+                            this.props.history.push({
+                                pathname: '/FinalTrackNightLifeAndResturants',
+                                dataToSend,
+                                a,
+                                b,
+        
+                               
+                                
+                            });
+                        
+                    
+                        
 
                     }
+                        
+                    }} > Calculate the shortest track! </Button>
 
-                }} > Calculate the shortest track! </Button>
 
-            
 
 
             </div>
@@ -459,4 +436,5 @@ class ShowSightSeeing extends Component {
 }
 
 export default ShowSightSeeing;
+
 

@@ -10,6 +10,7 @@ import { actuallSightsChecked } from './Count';
 import { lng_sight } from './Count';
 import { lan_sight } from './Count';
 
+
 //import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import savings from './Savings';
 
@@ -377,9 +378,7 @@ class ShowSightSeeing extends Component {
 
 
 
-            <div >
-               
-               
+  <div>
                 <h2 >Top Sight Seeing In The Area</h2>
                
                 <h4 >Choose Up to 4 atractions </h4>

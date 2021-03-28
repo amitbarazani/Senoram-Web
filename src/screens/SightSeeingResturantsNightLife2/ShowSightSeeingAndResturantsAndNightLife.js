@@ -14,8 +14,6 @@ import { lan_sight } from './Count';
 import { sightsSeeing } from './Count';
 import { nights } from './Count';
 import savings from './Savings4';
-import { locationCount } from './Count';
-
 
 
 
@@ -99,14 +97,10 @@ class ShowSightSeeing extends Component {
 
     }
 
-
-
-componentDidMount() {
-
-
-
     
- 
+
+    componentDidMount() {
+
         var that = this;   
         const Amadeus = require("amadeus");
         const amadeus = new Amadeus({
@@ -117,32 +111,33 @@ componentDidMount() {
         
         
         amadeus.referenceData.locations.pointsOfInterest.get({
-            latitude:  savings.lat1,
-            longitude: savings.lng1,
+            latitude: that.state.lat_to_pass,
+            longitude: that.state.lng_to_pass,
             radius: 20,
-            category: "NIGHTLIFE"
+            category: "SIGHTS",
+            
+            
         })
         .then(function (response) {
            
-            savings.try2 = response.data;
-         
+            savings.try1 = response.data;
             savings.lat1 = that.state.lat_to_pass;
             savings.lng1 = that.state.lng_to_pass;
             savings.location1 = that.state.location;
     
             
-            for (let key in savings.try2) {
-                savings.try2[key].photoUrl = "http://img.arirang.com/A_UpFile/Template/TP170927111345_A1.png"; //not yet"; 
-                savings.try2[key].place_id = 0;
-                savings.try2[key].address = "";
-                savings.try2[key].open = "Closed";
-                savings.try2[key].type = undefined;
-                let photoName = savings.try2[key].name;
+            for (let key in savings.try1) {
+                savings.try1[key].photoUrl = "http://img.arirang.com/A_UpFile/Template/TP170927111345_A1.png"; //not yet"; 
+                savings.try1[key].place_id = 0;
+                savings.try1[key].address = "";
+                savings.try1[key].open = "Closed";
+                savings.try1[key].type = undefined;
+                let photoName = savings.try1[key].name;
                 var map;
                 var service;
                 var infowindow;
                 const google = window.google;
-                initMap(savings.try2[key]);
+                initMap(savings.try1[key]);
     
                 function initMap(pointer) {
                     var sydney = new google.maps.LatLng(-33.867, 151.195);
@@ -164,6 +159,7 @@ componentDidMount() {
                         
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
     
+                           
                             
     
                             try {
@@ -177,17 +173,17 @@ componentDidMount() {
                                             
                                             temp_type[i] != "premise"  && 
                                             temp_type[i] != "establishment" )
-                                            savings.try2[key].type = temp_type[i];
+                                            savings.try1[key].type = temp_type[i];
                                             
                                         
                                         }
-                                        if (savings.try2[key].type == undefined)
+                                        if (savings.try1[key].type == undefined)
                                             {
-                                                savings.try2[key].type = "tourist_attraction";
+                                                savings.try1[key].type = "tourist_attraction";
                                                 
                                             }
                                     
-                                        savings.try2[key].type = savings.try2[key].type.split('_').join(' ')
+                                        savings.try1[key].type = savings.try1[key].type.split('_').join(' ')
                                       
                                         
                                 }
@@ -205,7 +201,7 @@ componentDidMount() {
                             if (results[0].opening_hours != undefined)
                             {
                                 if (results[0].opening_hours.open_now == true)
-                                    savings.try2[key].open = "Open"
+                                    savings.try1[key].open = "Open"
                                     
                             }
                         }
@@ -217,7 +213,7 @@ componentDidMount() {
                           }
                            
                             
-                            if (savings.try2[key] == undefined || savings.try2[key] == undefined)
+                            if (savings.try1[key] == undefined || savings.try1[key] == undefined)
                             {
                             
                                 that.props.history.push({
@@ -229,7 +225,7 @@ componentDidMount() {
     
                             //savings.try1[key].place_id = results[0].place_id;
                             try {
-                                savings.try2[key].place_id = results[0].place_id;
+                                savings.try1[key].place_id = results[0].place_id;
                               }
                               catch(err) {
                                 console.log(err);
@@ -240,7 +236,7 @@ componentDidMount() {
     
                               try {
                                 if (results[0].formatted_address != undefined)
-                                savings.try2[key].address = results[0].formatted_address;
+                                savings.try1[key].address = results[0].formatted_address;
                               }
                               catch(err) {
                                 console.log(err);
@@ -253,7 +249,7 @@ componentDidMount() {
                                 if (results[0].photos != undefined ) 
                             {
                                 
-                                savings.try2[key].photoUrl = results[0].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
+                                savings.try1[key].photoUrl = results[0].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
                             }
                               }
                               catch(err) {
@@ -263,7 +259,7 @@ componentDidMount() {
                                 });
                               }
                           
-                              that.setState({ loading: false, resturantsB: savings.try2 });
+                              that.setState({ loading: false, resturants: savings.try1 });
                             
                         }
                     })
@@ -280,7 +276,7 @@ componentDidMount() {
     
     .then(something => {
     
-        var temp = savings.try2;
+        var temp = savings.try1;
         for (let key in temp) {
     
             let t = distance(that.props.location.lat, that.props.location.lng, temp[key].geoCode.latitude, temp[key].geoCode.longitude, 'K');
@@ -298,8 +294,6 @@ componentDidMount() {
     
     
     })
-
-    
     
     
     
@@ -310,111 +304,135 @@ componentDidMount() {
     /// 14/03/2021
     
     
-}
     
-
-
-render() {
+    }
     
     
-    
-    
-    
-    return (
-    
-    
-    
-        <div >
-           
-           
-            <h2 >Now, Choose Top Night Life In The Area</h2>
-           
-            
-            
-            <Grid container justify="center">
           
-               
-                    
-                    { 
-                    this.state.resturantsB.map(resturant => (
-                        <div width="50%" class="w">
-                        <Night
-                            id={resturant.id}
-                            name={resturant.name}
-                            rank={resturant.rank}
-                            distance={resturant.distance}
-                            id={resturant.id}
-                            url= {resturant.photoUrl}
-                            type= {resturant.type}
-                            open= {resturant.open}
-                        />
-                      </div>
-                    ))
-                    }
-               
-               
-
-            
-
-
-
-            </Grid>
-
-            <Button variant="contained" color="primary" onClick={async () => {
-            let dataToSend1; 
-                if (count <= 0) {
-                    alert("Please select at least 1 activity")
-                   // dataToSend = this.props.location.location;
-                }
-                else {
-                    //console.log(sightsChecked);
-                    for( var i = 0; i < NightLifeChecked.length; i++){ 
-                        for( var j = 0; j < this.state.resturantsB.length; j++){
-                        if ( NightLifeChecked[i] === this.state.resturantsB[j].id) {
-
-                            nights.push(this.state.resturantsB[j]);
-                          //sightsChecked.splice(i, 1); 
-                        }
-                    
-                    }
-                    //dataToSend = this.props.location.location.location;
-                }
-               dataToSend1 = this.props.location.location.location;
-               
-               
-
-                    
-                  
-                  
-                    let a = this.props.location.a;
-         
-                   let b = this.props.location.b;
-                   
-                    this.props.history.push({
-                        pathname: '/FinalTrackSightSeeingAndNightLife',
-                        dataToSend1,
-                        a,
-                        b,
-
-
-
-                    });
-
-
-
-
-                }
-
-            }} > Show My Trip Plan </Button>
-
+    
+          
         
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        render() {
+    
+    
+    
+    
+    
+            return (
+    
+    
+    
+                <div >
+                   
+                   
+                    <h2 >First Choose Top Sight Seeing In The Area</h2>
+                   
+                    <h4 >You Can Choose Up to 4 atractions (Sight Seeing and Night Life in total) </h4>
+                    
+                    <Grid container justify="center">
+                  
+                       
+                            
+                            { 
+                            this.state.resturants.map(resturant => (
+                                <div width="50%" class="w">
+                                <Sight
+                                    id={resturant.id}
+                                    name={resturant.name}
+                                    rank={resturant.rank}
+                                    distance={resturant.distance}
+                                    id={resturant.id}
+                                    url= {resturant.photoUrl}
+                                    type= {resturant.type}
+                                    open= {resturant.open}
+                                />
+                              </div>
+                            ))
+                            }
+                       
+                       
+    
+                    
+    
+    
+    
+                    </Grid>
+    
+                    <Button variant="contained" color="primary" onClick={async () => {
 
+                       
+    
+                        if (count <= 0) {
+                          //  alert("Please select at least 1 activity")
+                          let dataToSend = this.props.location.location.location;
 
-        </div>
-    );
-}
-}
-export default ShowSightSeeing;
-
-
-
+                            let a = this.props.location.lat;
+                            let b = this.props.location.lng;
+                            let location = this.props.location.location;
+                        
+                            this.props.history.push({
+                                pathname: '/ShowSightSeeingAndNightLife22',
+                                dataToSend,
+                                location,
+                                a,
+                                b,
+    
+    
+    
+                            });
+    
+                        }
+                        else {
+                            //console.log(sightsChecked);
+                            for( var i = 0; i < sightsChecked.length; i++){ 
+                                for( var j = 0; j < this.state.resturants.length; j++){
+                                if ( sightsChecked[i] === this.state.resturants[j].id) {
+    
+                                    sightsSeeing.push(this.state.resturants[j]);
+                                  //sightsChecked.splice(i, 1); 
+                                }
+                            
+                            }
+                        }
+                      
+                            let dataToSend = this.props.location.location.location;
+                            let location = this.props.location.location;
+                            let a = this.props.location.lat;
+                            let b = this.props.location.lng;
+                            this.props.history.push({
+                                pathname: '/ShowSightSeeingAndResturantsAndNightLife2',
+                                dataToSend,
+                                location,
+                                a,
+                                b,
+    
+    
+    
+                            });
+    
+    
+    
+    
+                        }
+    
+                    }} > Now Show me Top Night Life </Button>
+    
+                
+    
+    
+                </div>
+            );
+        }
+    }
+    
+    export default ShowSightSeeing;
+    
