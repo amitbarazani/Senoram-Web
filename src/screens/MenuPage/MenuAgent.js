@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,8 +12,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import logo from '../logo_Royal.jpeg';
 import ship from '../ship.jpeg';
-import '../MenuPage/menu.css'
-import ButtonBase from '@material-ui/core/ButtonBase';
+import './menu.css'
+import UserInfo from '../ToolBar/UserInfo';
+import firebase from '../../Firebase/Firebase';
 
 
 const useStyles = makeStyles({
@@ -22,12 +23,7 @@ const useStyles = makeStyles({
       margin: "10px",
       background: "#D3D3D3",
     
-  },font: {
-    fontFamily:  "Calibri Light",
-    fontSize: "25px",
-  
-
-  }
+  },
   
  
   
@@ -43,22 +39,54 @@ const theme = createMuiTheme({
     }
   });
 
-  
 
+  function h(){
+    console.log("hi");
+  }  
+  
+ 
 export default function MediaCard() {
+ 
+h();
+const [userName, setUserName] = useState(null);
+const [user, setUser] = useState(null);
+
+authListener();
+ function authListener() {
+    firebase.auth().onAuthStateChanged((userResult) => {
+        console.log(userResult);
+        
+        //if (userResult) {
+          setUserName(userResult.displayName);
+        //  setUser(userResult);
+       
+     //   } 
+    });
+}
+
+
   const classes = useStyles();
 
 
-  //  backgroundImage: `url(${ship})` ,height: '900px' ,width:'1500px' }} >
-         
+  function logout(e) {
+    console.log("bye");
+   // user.preventDefault();
+    firebase.auth().signOut().then(()=>{
+      //window.location.href ="/Login";
+        window.location.href ="/HomePage";
+    } );
+    //window.location.reload();
+}
+
+  
   return (
 
     
-      <div style={{ 
-        backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
-         
-         <span>
-       <a href="/HomePage" target="_self" >           
+     <div style={{ 
+      backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+       
+        <span>
+       <a href="/MenuClient" target="_self" >           
        <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
      padding: '30px ',
      width: "400px",
@@ -74,28 +102,31 @@ export default function MediaCard() {
       
            
               
-    <Card className={classes.root} onClick={event => window.location.href ="/Login"}>
+    <Card className={classes.root}>
         
       <CardActionArea >
         <CardContent >
         <ThemeProvider theme={theme}> 
-          <Typography gutterBottom variant="h5" component="h2">
-            Log In Customers
+          <Typography gutterBottom variant="h5" component="h2" onClick={function(){
+     window.location.href ="/ProfileAgent";
+ 
+}}>
+           Personal Information
           </Typography>
           </ThemeProvider>
         </CardContent>
       </CardActionArea>
-
     </Card>
     </Grid>
 
+
     <Grid container justify="center">
-    <Card className={classes.root} onClick={event => window.location.href ="/LoginAgent"} >
+    <Card className={classes.root}>
       <CardActionArea>
         <CardContent>
         <ThemeProvider theme={theme}> 
           <Typography gutterBottom variant="h5" component="h2">
-          Log In Agents
+            Chat
           </Typography>
           </ThemeProvider>
         </CardContent>
@@ -103,15 +134,22 @@ export default function MediaCard() {
     </Card>
     </Grid>
 
-
+  
 
     <Grid container justify="center">
-    <Card className={classes.root}  onClick={event => window.location.href ="/ContactUs"}>
+    <Card className={classes.root} onClick={function(){
+    console.log("bye");
+    // user.preventDefault();
+     firebase.auth().signOut().then(()=>{
+       //window.location.href ="/Login";
+         window.location.href ="/HomePage";
+     } );
+}} >
       <CardActionArea>
         <CardContent>
         <ThemeProvider theme={theme}> 
           <Typography gutterBottom variant="h5" component="h2">
-            Contact Us
+          Sign out {userName}
           </Typography>
           </ThemeProvider>
         </CardContent>
@@ -119,14 +157,8 @@ export default function MediaCard() {
     </Card>
     </Grid>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <h2 className={classes.font}>Don't Have a Cruise Yet? </h2>
-    <h2 className={classes.font}><a href="https://www.royalcaribbean.com/" style={{color:"#000000"}}>Click To Check All Your Options! </a></h2>
+
     
-
-
-
 
 
     
@@ -134,3 +166,4 @@ export default function MediaCard() {
     </div>
   );
 }
+

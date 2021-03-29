@@ -287,6 +287,23 @@ class ShowSightSeeing extends Component {
                           }
                       
                           that.setState({ loading: false, resturants: savings.try1 });
+
+                          let  b = [];
+                          for (let i = 0; i < 9; i++) { 
+                       
+                                b.push(savings.try1[i]);
+                            
+                        }
+
+                        that.setState({resturants: b });
+
+                        var temp = savings.try1;
+    for (let key in temp) {
+
+        let t = distance(that.props.location.lat, that.props.location.lng, temp[key].geoCode.latitude, temp[key].geoCode.longitude, 'K');
+        temp[key].distance = t;
+    }
+    that.setState({ loading: false, resturants: mergeSort(that.state.resturants) });
                         
                     }
                 })
@@ -361,6 +378,15 @@ class ShowSightSeeing extends Component {
             
             <div >
 
+<span>
+       <a href="/MenuClient" target="_self" >           
+       <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
+     padding: '30px ',
+     width: "400px",
+  height: "150px",}} />
+     </a>
+   </span>
+
                 <h2 >Top Resturants In The Area</h2>
                 <Grid container justify="center">
               
@@ -392,14 +418,21 @@ class ShowSightSeeing extends Component {
                 </Grid>
 
                 <Button variant="contained" color="primary" onClick={async () => {
-                         this.props.history.push({
-                            pathname: '/DataSent',
-                        });
-                    }} > Send Resutrants To My Email! </Button>
+                           var pageHTML = document.documentElement.innerHTML;
+
+
+                           let data = new Blob([pageHTML], {type: 'data:attachment/text,'});
+                           let csvURL = window.URL.createObjectURL(data);
+                           let tempLink = document.createElement('a');
+                           tempLink.href = csvURL;
+                           tempLink.setAttribute('download', 'Resturants.html');
+                           tempLink.click();
+                    }} > SAVE </Button>
 
 
 
-
+                    <br></br>
+                    <br></br>
             </div>
         );
     }

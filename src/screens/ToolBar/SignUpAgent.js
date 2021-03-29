@@ -29,7 +29,7 @@ class Login extends Component {
             fullName: '',
             password: '',
             idNumber: '',
-            role: 'Client',
+            role: 'Agent',
 
             
         };
@@ -59,7 +59,7 @@ class Login extends Component {
           .then(()=>{
             firebase.auth().onAuthStateChanged((userResult) => {
              
-              axios.put('/Clients/' + this.state.idNumber + '.json', this.state).then(function (response) {
+              axios.put('/Agents/' + this.state.idNumber + '.json', this.state).then(function (response) {
                 console.log(response);
                 a = response.data.name;
                  
@@ -91,7 +91,7 @@ class Login extends Component {
           
 
       .then(()=>{
-        window.location.href = "../MenuClient";
+        window.location.href = "../MenuAgent";
        
       })
         
@@ -175,7 +175,7 @@ class Login extends Component {
 
                     <p className="text-center my-3">
                        Already have an acount? {" "}
-                        <a href="/Login" className="text-blue-500 hover:text-blue-600"> Sign in here</a>
+                        <a href="/LoginAgent" className="text-blue-500 hover:text-blue-600"> Sign in here</a>
                         <br />{" "}
                      
                     </p>

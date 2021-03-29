@@ -28,6 +28,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
+import RestaurantIcon from '@material-ui/icons/Restaurant';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -94,7 +95,7 @@ const Final = (props) => {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <h3>Resturants In The Area : </h3>
+            <h5> &nbsp;&nbsp;  <b>Resturants In The Area</b> </h5>
            
            
 
@@ -105,7 +106,7 @@ const Final = (props) => {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <h4> 1) {props.resturant1}</h4>
+            <h6>   <RestaurantIcon color="primary"/> {props.resturant1}</h6>
            
 
             </Grid>
@@ -114,7 +115,7 @@ const Final = (props) => {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <h4> 2) {props.resturant2}</h4>
+            <h6>   <RestaurantIcon color="primary"/> {props.resturant2}</h6>
 
            
 

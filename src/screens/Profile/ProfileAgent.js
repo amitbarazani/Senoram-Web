@@ -56,7 +56,7 @@ class Profile extends Component {
             });
 
       
-                const itemsRef = firebase.database().ref(`Clients/`);
+                const itemsRef = firebase.database().ref(`Agents/`);
                 itemsRef.on('value', (snapshot) => {
                     let reservations = snapshot.val();
                     for (let reservation in reservations) {
@@ -81,7 +81,7 @@ class Profile extends Component {
             let newState2 = [];
 
             for (let reservation in reservations) {
-                if (reservations[reservation].idClient == this.state.id) {
+                if (reservations[reservation].IDAgent == this.state.id) {
                     newState.push({
                         ArriveAt: reservations[reservation].ArriveAt,
                         ArriveTo: reservations[reservation].ArriveTo,
@@ -97,15 +97,18 @@ class Profile extends Component {
                         stopPlace: reservations[reservation].stopPlace,
                         stopTime: reservations[reservation].stopTime,
                         Price: reservations[reservation].Price,
+                        IDAgent: reservations[reservation].IDAgent,
+                        ClientEmail: reservations[reservation].ClientEmail,
 
                     });
                     newState2.push({
                         ReservationNumber: reservations[reservation].ReservationNumber,
                         Status: reservations[reservation].Status,
+                        fullName: reservations[reservation].fullName,
+                        ClientEmail: reservations[reservation].ClientEmail,
 
                     });
 
-                    
                     
                 }
                
@@ -135,7 +138,7 @@ class Profile extends Component {
     login(e) {
         e.preventDefault();
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-            window.location.href = "../MenuClient";
+            window.location.href = "../MenuAgent";
         })
         
         
@@ -159,7 +162,7 @@ class Profile extends Component {
         if (reservations) {
             condition =    <MaterialTable
             style={{ padding: '0 20px'}}
-            title="Reservations"
+            title="Customers"
         
             detailPanel={rowData => {
 
@@ -211,12 +214,14 @@ class Profile extends Component {
             columns={[
                 { title: "Reservation Number", field: 'ReservationNumber' } ,
                 { title: "Status", field: 'Status' },
+                { title: "Client Name", field: 'fullName' },
+                { title: "Client Email", field: 'ClientEmail' },
             ]}
         ></MaterialTable>
 
 
         } else {
-            condition = <h3>No Reservations Yet!</h3>;
+            condition = <h3>No Clients Yet!</h3>;
         }
 
       
@@ -228,7 +233,7 @@ class Profile extends Component {
                  
 
                  <span>
-               <a href="/MenuClient" target="_self" >           
+               <a href="/MenuAgent" target="_self" >           
                <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
      padding: '30px ',
      width: "400px",

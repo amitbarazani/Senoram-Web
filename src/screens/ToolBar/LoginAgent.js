@@ -30,7 +30,7 @@ class Login extends Component {
     login(e) {
         e.preventDefault();
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-            window.location.href = "../MenuClient";
+            window.location.href = "../MenuAgent";
         })
         
         
@@ -101,9 +101,9 @@ class Login extends Component {
 
                     <p className="text-center my-3">
                         Don't have an account?{" "}
-                        <a href="/signUp" className="text-blue-500 hover:text-blue-600"> Sign up here</a>
+                        <a href="/signUpAgent" className="text-blue-500 hover:text-blue-600"> Sign up here</a>
                         <br />{" "}
-                        <a href="/passwordReset" className="text-blue-500 hover:text-blue-600"> Forgot Password?</a>
+                        <a href="/passwordResetAgent" className="text-blue-500 hover:text-blue-600"> Forgot Password?</a>
                     </p>
                 </div>
                 <br></br>

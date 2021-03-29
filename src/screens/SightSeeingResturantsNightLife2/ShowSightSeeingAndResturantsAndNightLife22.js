@@ -264,6 +264,25 @@ componentDidMount() {
                               }
                           
                               that.setState({ loading: false, resturantsB: savings.try2 });
+
+                              let  b = [];
+                              for (let i = 0; i < 9; i++) { 
+                           
+                                    b.push(savings.try2[i]);
+                                
+                            }
+    
+                            that.setState({resturantsB: b });
+
+
+                              var temp = savings.try2;
+        for (let key in temp) {
+    
+            let t = distance(that.props.location.a, that.props.location.b, temp[key].geoCode.latitude, temp[key].geoCode.longitude, 'K');
+            temp[key].distance = t;
+        }
+        that.setState({ loading: false, resturantsB: mergeSort(that.state.resturantsB) });
+    
                             
                         }
                     })
@@ -283,7 +302,7 @@ componentDidMount() {
         var temp = savings.try2;
         for (let key in temp) {
     
-            let t = distance(that.props.location.lat, that.props.location.lng, temp[key].geoCode.latitude, temp[key].geoCode.longitude, 'K');
+            let t = distance(that.props.location.a, that.props.location.b, temp[key].geoCode.latitude, temp[key].geoCode.longitude, 'K');
             temp[key].distance = t;
         }
         that.setState({ loading: false, resturants: mergeSort(that.state.resturants) });
@@ -325,6 +344,15 @@ render() {
     
     
         <div >
+
+<span>
+       <a href="/MenuClient" target="_self" >           
+       <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
+     padding: '30px ',
+     width: "400px",
+  height: "150px",}} />
+     </a>
+   </span>
            
            
             <h2 >Now, Choose Top Night Life In The Area</h2>
@@ -407,7 +435,8 @@ render() {
 
             }} > Show My Trip Plan </Button>
 
-        
+        <br></br>
+        <br></br>
 
 
         </div>

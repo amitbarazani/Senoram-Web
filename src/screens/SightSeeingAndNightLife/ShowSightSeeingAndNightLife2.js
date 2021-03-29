@@ -260,6 +260,15 @@ class ShowSightSeeing extends Component {
                               }
                           
                               that.setState({ loading: false, resturants: savings.try1 });
+                              let  b = [];
+                              for (let i = 0; i < 9; i++) { 
+                           
+                                    b.push(savings.try1[i]);
+                                
+                            }
+    
+                            that.setState({resturants: b });
+                            
                             
                         }
                     })
@@ -333,7 +342,14 @@ class ShowSightSeeing extends Component {
     
                 <div >
                    
-                   
+                   <span>
+       <a href="/MenuClient" target="_self" >           
+       <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
+     padding: '30px ',
+     width: "400px",
+  height: "150px",}} />
+     </a>
+   </span>
                     <h2 >First Choose Top Sight Seeing In The Area</h2>
                    
                     <h4 >You Can Choose Up to 4 atractions (Sight Seeing and Night Life in total) </h4>
@@ -424,10 +440,11 @@ class ShowSightSeeing extends Component {
     
                         }
     
-                    }} > Now Show me Top Night Life </Button>
+                    }} > Show Top Night Life </Button>
     
                 
-    
+    <br></br>
+<br></br>
     
                 </div>
             );

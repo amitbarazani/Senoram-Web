@@ -19,6 +19,16 @@ import { lng_sight } from './Count';
 import { lan_sight } from './Count';
 import PriorityQueue from "priorityqueue";
 import Button from '@material-ui/core/Button';
+import ship from '../ship.jpeg';
+import Card from '@material-ui/core/Card';
+
+
+const style ={
+    
+    width: '50%',
+    position: 'center',
+}
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -587,10 +597,32 @@ class FinalTrack extends Component {
 
         return (
 
-            <div >
+            <div style={{ 
+                backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+<span>
+       <a href="/MenuClient" target="_self" >           
+       <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
+     padding: '30px ',
+     width: "400px",
+  height: "150px",}} />
+     </a>
+   </span>
+
+
+<Grid 
+  container
+  spacing={0}
+  direction="column"
+  alignItems="center"
+  justify="center"
+ 
+ >
+
+<Card style={style}>
                 <Grid container justify="center">
                     <h5>
-                        <h1>Trip Plan</h1>
+                    <br></br>
+<br></br>
                         <p>{this.state.location} </p>
                         <p>Starting Point</p>
                         {this.state.sights.map(element => (
@@ -614,10 +646,22 @@ class FinalTrack extends Component {
 
                 </Grid>
                 <Button variant="contained" color="primary" onClick={async () => {
-                         this.props.history.push({
-                            pathname: '/DataSent',
-                        });
-                    }} > Send Plan To My Email! </Button>
+                     var pageHTML = document.documentElement.innerHTML;
+
+
+                     let data = new Blob([pageHTML], {type: 'data:attachment/text,'});
+                     let csvURL = window.URL.createObjectURL(data);
+                     let tempLink = document.createElement('a');
+                     tempLink.href = csvURL;
+                     tempLink.setAttribute('download', 'NightLife.html');
+                     tempLink.click();
+                    }} > Save </Button>
+                    <br></br>
+<br></br>
+
+</Card>
+</Grid>
+
             </div>
         );
     }

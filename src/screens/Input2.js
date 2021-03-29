@@ -304,8 +304,14 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
             backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
 
                                 
-       <img src={logo}   style={{ 
-     padding: '30px '}}/>
+<span>
+       <a href="/MenuClient" target="_self" >           
+       <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
+     padding: '30px ',
+     width: "400px",
+  height: "150px",}} />
+     </a>
+   </span>
 
 <Grid
   container

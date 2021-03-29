@@ -35,7 +35,7 @@ class Login extends Component {
       firebase.auth().sendPasswordResetEmail(this.state.email).then(function () {
           alert("Email Sent");
       }).then(function (response) {
-        window.location.href = "../Login";
+        window.location.href = "../LoginAgent";
       }).catch(function (error) {
           alert("Email Not Valid");
       });

@@ -20,6 +20,10 @@ import { lan_sight } from './Count';
 import PriorityQueue from "priorityqueue";
 import Button from '@material-ui/core/Button';
 import emailjs from 'emailjs-com';
+import logo from  '../logo_Royal.jpeg';
+import ship from '../ship.jpeg';
+import Card from '@material-ui/core/Card';
+import ReactDOMServer from "react-dom/server";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,6 +32,14 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     },
 }));
+
+
+const style ={
+    
+    width: '50%',
+    position: 'center',
+}
+
 
 
 function distance(lat1, lon1, lat2, lon2, unit) {
@@ -590,10 +602,34 @@ class FinalTrack extends Component {
 
         return (
 
-            <div >
+            <div style={{ 
+                backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+<span>
+       <a href="/MenuClient" target="_self" >           
+       <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
+     padding: '30px ',
+     width: "400px",
+  height: "150px",}} />
+     </a>
+   </span>
+
+
+<Grid 
+  container
+  spacing={0}
+  direction="column"
+  alignItems="center"
+  justify="center"
+ 
+ >
+
+<Card style={style}>
+
+
                 <Grid container justify="center">
                     <h5>
-                        <h1>Trip Plan</h1>
+                   
+                    <br></br>
                         <p>{this.state.location} </p>
                         <p>Starting Point</p>
                        
@@ -620,6 +656,17 @@ class FinalTrack extends Component {
 
                 </Grid>
                 <Button variant="contained" color="primary" onClick={async () => {
+
+var pageHTML = document.documentElement.innerHTML;
+
+
+let data = new Blob([pageHTML], {type: 'data:attachment/text,'});
+let csvURL = window.URL.createObjectURL(data);
+let tempLink = document.createElement('a');
+tempLink.href = csvURL;
+tempLink.setAttribute('download', 'SightSeeing.html');
+tempLink.click();
+                    /*
                          this.props.history.push({
                             pathname: '/DataSent',
                         });
@@ -633,9 +680,15 @@ class FinalTrack extends Component {
 
                     }
 
-                    
+                    */
 
-                    }} > Send Plan To My Email! </Button>
+                    }} > Save </Button>
+
+                    <br></br>
+                    <br></br>
+
+</Card>
+</Grid>
             </div>
         );
     }
@@ -650,3 +703,5 @@ export default FinalTrack;
 // <Location location={this.state.location} name={this.state.ending} />
 
 //  <Location location={this.state.location} name="Starting Point" />
+
+// <h1>Trip Plan</h1>

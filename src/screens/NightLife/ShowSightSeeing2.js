@@ -37,6 +37,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 
 
 function mergeSort(array) {
+   
     const half = array.length / 2
 
     // Base case or terminating case
@@ -45,11 +46,13 @@ function mergeSort(array) {
     }
 
     const left = array.splice(0, half)
+    
     return merge(mergeSort(left), mergeSort(array))
 }
 
 
 function merge(left, right) {
+  
     let arr = []
     // Break out of loop if any one of the array gets empty
     while (left.length && right.length) {
@@ -290,6 +293,24 @@ class ShowSightSeeing extends Component {
                           }
                       
                           that.setState({ loading: false, resturants: savings.try1 });
+
+                          let  b = [];
+                          for (let i = 0; i < 9; i++) { 
+                       
+                                b.push(savings.try1[i]);
+                            
+                        }
+
+                        that.setState({resturants: b });
+
+
+                        var temp = savings.try1;
+                        for (let key in temp) {
+                    
+                            let t = distance(that.props.location.lat, that.props.location.lng, temp[key].geoCode.latitude, temp[key].geoCode.longitude, 'K');
+                            temp[key].distance = t;
+                        }
+                        that.setState({ loading: false, resturants: mergeSort(that.state.resturants) });
                         
                     }
                 })
@@ -313,6 +334,7 @@ class ShowSightSeeing extends Component {
         temp[key].distance = t;
     }
     that.setState({ loading: false, resturants: mergeSort(that.state.resturants) });
+ 
 
 })
 
@@ -321,6 +343,8 @@ class ShowSightSeeing extends Component {
 
 
     that.setState({ loading: false, resturants: mergeSort(that.state.resturants) });
+
+
 
 
 })
@@ -362,7 +386,14 @@ class ShowSightSeeing extends Component {
 
 
             <div >
-               
+                       <span>
+       <a href="/MenuClient" target="_self" >           
+       <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
+     padding: '30px ',
+     width: "400px",
+  height: "150px",}} />
+     </a>
+   </span>
                
                 <h2 >Top Night Life In The Area</h2>
                
@@ -436,7 +467,8 @@ class ShowSightSeeing extends Component {
 
                 }} > Calculate the shortest track! </Button>
 
-            
+                <br></br>
+                <br></br>
 
 
             </div>

@@ -292,14 +292,23 @@ class ShowSightSeeing extends Component {
                           }
                       
                           that.setState({ loading: false, resturants: savings.try1 });
-                          console.log("hiiiiiii");
-                          console.log(savings.try1);
-                          if (savings.try1.length % 2 == 0)
-                          {////
-                              //that.setState({ resturants: savings.try1.splice(0, savings.try1.length-2)});
-                              console.log("hiiiiiii");
-                          }
                           
+                          let  b = [];
+                          for (let i = 0; i < 9; i++) { 
+                       
+                                b.push(savings.try1[i]);
+                            
+                        }
+
+                        that.setState({resturants: b });
+
+                        var temp = savings.try1;
+                        for (let key in temp) {
+                    
+                            let t = distance(that.props.location.lat, that.props.location.lng, temp[key].geoCode.latitude, temp[key].geoCode.longitude, 'K');
+                            temp[key].distance = t;
+                        }
+                        that.setState({ loading: false, resturants: mergeSort(that.state.resturants) });
                         
                     }
                 })
@@ -375,8 +384,14 @@ class ShowSightSeeing extends Component {
 
             <div>
                
-               <img src={logo}   style={{ 
-     padding: '30px '}}/>
+               <span>
+       <a href="/MenuClient" target="_self" >           
+       <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
+     padding: '30px ',
+     width: "400px",
+  height: "150px",}} />
+     </a>
+   </span>
                
                
                 <h2 >Top Sight Seeing In The Area</h2>
@@ -450,7 +465,10 @@ class ShowSightSeeing extends Component {
 
                 }} > Calculate the shortest track! </Button>
 
-            
+<br></br>
+<br></br>
+
+
 
 
             </div>
