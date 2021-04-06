@@ -1,0 +1,15 @@
+
+
+.messages {
+
+    height: 240px;
+    overflow-y: scroll;
+}
+
+.menu  {
+
+    height: 200px;
+    overflow-y: scroll;
+ 
+    
+}

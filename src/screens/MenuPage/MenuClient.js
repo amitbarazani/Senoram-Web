@@ -15,7 +15,7 @@ import ship from '../ship.jpeg';
 import './menu.css'
 import UserInfo from '../ToolBar/UserInfo';
 import firebase from '../../Firebase/Firebase';
-
+import axios from '../../Firebase/axios';
 
 const useStyles = makeStyles({
   root: {
@@ -51,6 +51,7 @@ h();
 const [userName, setUserName] = useState(null);
 const [user, setUser] = useState(null);
 
+
 authListener();
  function authListener() {
     firebase.auth().onAuthStateChanged((userResult) => {
@@ -58,6 +59,7 @@ authListener();
         
         //if (userResult) {
           setUserName(userResult.displayName);
+    
         //  setUser(userResult);
        
      //   } 
@@ -141,7 +143,10 @@ authListener();
       <CardActionArea>
         <CardContent>
         <ThemeProvider theme={theme}> 
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" onClick={function(){
+     window.location.href ="/Chat";
+ 
+}}>
             Chat
           </Typography>
           </ThemeProvider>
@@ -157,8 +162,10 @@ authListener();
     console.log("bye");
     // user.preventDefault();
      firebase.auth().signOut().then(()=>{
+
+       
        //window.location.href ="/Login";
-         window.location.href ="/HomePage";
+        window.location.href ="/HomePage";
      } );
 }} >
       <CardActionArea>

@@ -2,6 +2,8 @@
 import firebase from 'firebase/app';
 import "firebase/auth"; // ADDED 
 import "firebase/firestore";  // ADDED 
+import "firebase/storage";
+import "firebase/database";
 
 
 var firebaseConfig = {

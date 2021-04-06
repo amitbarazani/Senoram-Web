@@ -23,15 +23,56 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            id: '',
         };
     }
+
+    
+        
 
 
     login(e) {
         e.preventDefault();
+
+        axios.get('/Clients.json')
+            .then(res => {
+    
+                for (let key in res.data) {
+                    if (res.data[key].email == this.state.email)
+                    {
+                       this.setState({ id: res.data[key].idNumber });
+                    }  
+                    
+                      
+                }
+                
+            })
+            .catch(err => {
+               console.log(err)
+            })
+
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-            window.location.href = "../MenuClient";
+            
+           
         })
+
+
+        .then((something) =>{
+
+            //window.location.href = "../MenuClient";
+       
+         
+
+            window.location.href = "../MenuClient";
+            //console.log(response);
+         
+                
+
+    
+          })
+
+
+         
         
         
         .catch((error) => {

@@ -41,6 +41,8 @@ import SignUpAgent from './screens/ToolBar/SignUpAgent';
 import passwordResetAgent from './screens/ToolBar/PasswordResetAgent';
 import ProfileAgent from './screens/Profile/ProfileAgent';
 import ContactUs from './screens/ContactUs/ContactUs';
+import Chat from './screens/Chat/Chat';
+import ChangePhoto from './screens/Chat/ChangePhoto';
 
 
 class App extends Component {
@@ -100,6 +102,8 @@ class App extends Component {
         <Route path="/passwordResetAgent" component={passwordResetAgent} />
         <Route path="/ProfileAgent" component={ProfileAgent} />
         <Route path="/ContactUs" component={ContactUs} />
+        <Route path="/Chat" component={Chat} />
+        <Route path="/ChangePhoto" component={ChangePhoto} />
         
         </Switch>
        

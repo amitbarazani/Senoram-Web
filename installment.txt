@@ -18,3 +18,6 @@ npm install -g express
 npm install unsplash-js@6.0.0
 npm install @material-ui/core
 npm install material-table --save --force
+npm i react-avatar-editor
+npm install react-redux
+npm i moment

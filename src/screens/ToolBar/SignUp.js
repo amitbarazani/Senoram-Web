@@ -77,6 +77,7 @@ class Login extends Component {
                
                 })
                 .catch(function(error) {
+                  console.log(error);
                   // An error happened.
                 });
               } 
@@ -84,14 +85,14 @@ class Login extends Component {
           })
           .then((something) =>{
 
-            
+            window.location.href = "../MenuClient";
             
           })
         
           
 
       .then(()=>{
-        window.location.href = "../MenuClient";
+      
        
       })
         
