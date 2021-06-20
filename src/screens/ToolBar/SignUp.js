@@ -62,6 +62,7 @@ class Login extends Component {
               axios.put('/Clients/' + this.state.idNumber + '.json', this.state).then(function (response) {
                 console.log(response);
                 a = response.data.name;
+                window.location.href = "../MenuClient";
                  
                     
 
@@ -85,7 +86,7 @@ class Login extends Component {
           })
           .then((something) =>{
 
-            window.location.href = "../MenuClient";
+           // window.location.href = "../MenuClient";
             
           })
         
@@ -118,7 +119,7 @@ class Login extends Component {
     render() {
         return (
           <div style={{ 
-            backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+            backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
              
     
         

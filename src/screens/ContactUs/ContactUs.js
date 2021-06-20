@@ -41,9 +41,10 @@ class Login extends Component {
      
       if (this.state.email != '' && this.state.fullName != '' && this.state.subject != '')
       {
-       
+        alert("Message Sent!");
         emailjs.send("service_8j87v64","template_dsjcrez", { location: this.state.fullName, to: "senormasenorma@gmail.com", attraction: this.state.email , km: this.state.subject}, 'user_QHLfJgEU8DbBaDPnuVHsS')
         .then(function (response) {
+          
             window.location.href ="/HomePage";
         });
 
@@ -69,8 +70,7 @@ class Login extends Component {
     render() {
         return (
           <div style={{ 
-            backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
-             
+            backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
     
         
     <span>

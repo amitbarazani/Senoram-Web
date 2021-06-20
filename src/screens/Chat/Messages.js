@@ -126,7 +126,7 @@ class Messages extends React.Component {
    mySecondFunction() {
     
     var that = this
-    console.log("hi");
+    
     axios.get('/CurrentChannel.json')
       .then(res => {
 
@@ -228,7 +228,7 @@ class Messages extends React.Component {
 
   addListeners = channelId => {
 
-    console.log("h");
+
     
     this.addMessageListener(channelId);
   };

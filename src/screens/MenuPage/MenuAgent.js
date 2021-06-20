@@ -15,7 +15,7 @@ import ship from '../ship.jpeg';
 import './menu.css'
 import UserInfo from '../ToolBar/UserInfo';
 import firebase from '../../Firebase/Firebase';
-
+import axios from '../../Firebase/axios';
 
 const useStyles = makeStyles({
   root: {
@@ -50,17 +50,27 @@ export default function MediaCard() {
 h();
 const [userName, setUserName] = useState(null);
 const [user, setUser] = useState(null);
+const [email, setEmail] = useState(null);
+const [id, setID] = useState(null);
 
 authListener();
  function authListener() {
     firebase.auth().onAuthStateChanged((userResult) => {
-        console.log(userResult);
-        
-        //if (userResult) {
-          setUserName(userResult.displayName);
-        //  setUser(userResult);
-       
-     //   } 
+      setUserName(userResult.displayName);
+      setEmail(userResult.email);
+
+      const itemsRef = firebase.database().ref(`Clients/`);
+      itemsRef.on('value', (snapshot) => {
+          let reservations = snapshot.val();
+          for (let reservation in reservations) {
+      
+              if (reservations[reservation].email == email)
+              {
+                  setID(reservations[reservation].idNumber);
+                  if (id)
+                  axios.patch('/Clients/'+ id + '.json', {Online: 'No',}).then(function (response) {console.log(response);});
+              }
+            }});
     });
 }
 
@@ -82,8 +92,8 @@ authListener();
   return (
 
     
-     <div style={{ 
-      backgroundImage: `url(${ship})` ,height: '900px' ,width:'80%' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+    <div style={{ 
+      backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
        
         <span>
        <a href="/MenuClient" target="_self" >           
@@ -125,7 +135,10 @@ authListener();
       <CardActionArea>
         <CardContent>
         <ThemeProvider theme={theme}> 
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" onClick={function(){
+     window.location.href ="/Chat";
+ 
+}}>
             Chat
           </Typography>
           </ThemeProvider>
@@ -138,6 +151,7 @@ authListener();
 
     <Grid container justify="center">
     <Card className={classes.root} onClick={function(){
+      
     console.log("bye");
     // user.preventDefault();
      firebase.auth().signOut().then(()=>{
