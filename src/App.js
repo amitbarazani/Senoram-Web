@@ -59,6 +59,7 @@ class App extends Component {
    
       <div className="App">
         <div className="App-header">
+        <Route exact path="/"><Redirect to="/HomePage" /></Route>
         <Switch>
        
         <Route path="/ShowResturants" component={ShowResturants} />
