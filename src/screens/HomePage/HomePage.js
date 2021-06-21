@@ -55,7 +55,7 @@ export default function MediaCard() {
 
     
       <div style={{ 
-        backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+        backgroundImage: `url("https://raw.githubusercontent.com/amitbarazani/Senoram-Web/main/src/screens/ship.jpeg?token=AOWPD7NC76VYPDBODISEBSTA2DBJG")` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
          
          <span>
        <a href="/HomePage" target="_self" >           
