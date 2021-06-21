@@ -44,7 +44,6 @@ import ContactUs from './screens/ContactUs/ContactUs';
 import Chat from './screens/Chat/Chat';
 import ChangePhoto from './screens/Chat/ChangePhoto';
 
-
 class App extends Component {
 
   

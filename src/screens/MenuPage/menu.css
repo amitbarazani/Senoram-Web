@@ -7,15 +7,7 @@ body {
     padding: 2px 16px;
     width: 100%;
     zoom: 70%;
-
+    background-image: url("../ship.jpeg");
     }
 
-    .chen {
-        background-image: url("../ship.jpeg");
-        background-position-x: '50%' ;
-        height: '1000px';
     
-    }
-
-
-  

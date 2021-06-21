@@ -54,7 +54,7 @@ export default function MediaCard() {
   return (
 
        
-<div class="chen"  >
+<div >
 
 
 
