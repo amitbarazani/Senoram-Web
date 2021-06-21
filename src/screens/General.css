@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;;
+    padding: 20px;
+  
+  
+  }
+
+  .w {
+   
+    padding: 20px;
+
+  }
+ 

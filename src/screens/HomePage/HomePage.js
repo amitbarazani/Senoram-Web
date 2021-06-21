@@ -53,11 +53,18 @@ export default function MediaCard() {
          
   return (
 
-    
-      <div style={{ 
-        backgroundImage: `url("https://raw.githubusercontent.com/amitbarazani/Senoram-Web/main/src/screens/ship.jpeg?token=AOWPD7NC76VYPDBODISEBSTA2DBJG")` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
-         
-         <span>
+       
+<div style={{ 
+        backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+
+
+
+
+
+
+
+
+  <span>
        <a href="/HomePage" target="_self" >           
        <img src={"https://logodownload.org/wp-content/uploads/2020/02/royal-caribbean-logo-4.png"}   style={{ 
      padding: '30px ',
