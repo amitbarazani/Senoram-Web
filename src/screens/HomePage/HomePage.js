@@ -54,8 +54,10 @@ export default function MediaCard() {
   return (
 
     
-      <div style={{ 
+<div style={{ 
         backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+
+          
          
          <span>
        <a href="/HomePage" target="_self" >           
