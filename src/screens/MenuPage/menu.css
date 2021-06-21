@@ -8,7 +8,14 @@ body {
     width: 100%;
     zoom: 70%;
 
-
-
     }
+
+    .chen {
+        background-image: url("../ship.jpeg");
+        background-position-x: '50%' ;
+        height: '1000px';
+    
+    }
+
+
   
