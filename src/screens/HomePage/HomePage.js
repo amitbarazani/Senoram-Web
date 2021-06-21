@@ -12,7 +12,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import logo from '../logo_Royal.jpeg';
 import ship from '../ship.jpeg';
-import '../MenuPage/menu.css'
+import '../MenuPage/menu.css';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 
@@ -54,7 +54,10 @@ export default function MediaCard() {
   return (
 
        
-<div >
+<div style={{ 
+        backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+
+
 
 
 
