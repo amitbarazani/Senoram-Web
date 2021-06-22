@@ -57,28 +57,17 @@ authListener();
  function authListener() {
     firebase.auth().onAuthStateChanged((userResult) => {
 
-      if(userResult == null)
+    
+
+      if (userResult.uid != "KzHcw5sAFuSPwgklaLFsC6FhQOp1")
       window.location.href ="/HomePage";
 
-      if (userResult.uid == "KzHcw5sAFuSPwgklaLFsC6FhQOp1")
-      window.location.href ="/MenuAdmin";
 
       
       setUserName(userResult.displayName);
       setEmail(userResult.email);
 
-      const itemsRef = firebase.database().ref(`Clients/`);
-      itemsRef.on('value', (snapshot) => {
-          let reservations = snapshot.val();
-          for (let reservation in reservations) {
-      
-              if (reservations[reservation].email == email)
-              {
-                  setID(reservations[reservation].idNumber);
-                  if (id)
-                  axios.patch('/Clients/'+ id + '.json', {Online: 'No',}).then(function (response) {console.log(response);});
-              }
-            }});
+     
     });
 }
 
@@ -126,10 +115,10 @@ authListener();
         <CardContent >
         <ThemeProvider theme={theme}> 
           <Typography gutterBottom variant="h5" component="h2" onClick={function(){
-     window.location.href ="/ProfileAgent";
+     window.location.href ="/Clients";
  
 }}>
-           Personal Information
+           Clients
           </Typography>
           </ThemeProvider>
         </CardContent>
@@ -140,14 +129,15 @@ authListener();
 
     <Grid container justify="center">
     <Card className={classes.root}>
-      <CardActionArea>
-        <CardContent>
+        
+      <CardActionArea >
+        <CardContent >
         <ThemeProvider theme={theme}> 
           <Typography gutterBottom variant="h5" component="h2" onClick={function(){
-     window.location.href ="/Chat";
+     window.location.href ="/Agents";
  
 }}>
-            Chat
+           Agents
           </Typography>
           </ThemeProvider>
         </CardContent>

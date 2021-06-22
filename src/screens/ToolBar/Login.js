@@ -6,6 +6,7 @@ import logo from '../logo_Royal.jpeg';
 import ship from '../ship.jpeg';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import { ExitToApp } from '@material-ui/icons';
 
 const style ={
     
@@ -24,6 +25,7 @@ class Login extends Component {
             email: '',
             password: '',
             id: '',
+            blocked: 'no',
         };
     }
 
@@ -33,6 +35,25 @@ class Login extends Component {
 
     login(e) {
         e.preventDefault();
+
+        axios.get('/Blocked.json')
+        .then(res => {
+
+            for (let key in res.data) {
+                if (res.data[key].email == this.state.email)
+                {
+                    this.setState({ blocked: "yes" });
+                    console.log(this.state.blocked)
+                   alert("Sorry, You have been blocked!");
+          
+                
+
+                }  
+                
+                  
+            }
+
+        }) .then (
 
         axios.get('/Clients.json')
             .then(res => {
@@ -45,39 +66,56 @@ class Login extends Component {
                     
                       
                 }
+
+                if (this.state.blocked == "yes" )
+                {
+                    console.log("im inn")
+                    window.location.href = "../Login"; 
+                }
+               
+                else 
+                {
+                    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+                    
+                   
+                    })
+            
+            
+                    .then((something) =>{
+            
+                        window.location.href = "../MenuClient";
+                   
+                     
+                       
+                       // window.location.href = "../MenuClient";
+                        //console.log(response);
+                     
+                            
+            
+                
+                      })
+        
+                      
+                .catch((error) => {
+                    alert("One of the fields is invalid!");
+                });
+                }
+              
+        
                 
             })
             .catch(err => {
                console.log(err)
             })
 
-        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
             
-           
-        })
+        )
 
-
-        .then((something) =>{
-
-            //window.location.href = "../MenuClient";
        
-         
-
-            window.location.href = "../MenuClient";
-            //console.log(response);
-         
-                
-
-    
-          })
-
 
          
         
         
-        .catch((error) => {
-            alert("One of the fields is invalid!");
-        });
     }
 
 

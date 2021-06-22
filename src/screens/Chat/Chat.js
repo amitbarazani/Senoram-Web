@@ -92,6 +92,9 @@ class Chat extends Component {
 
       var photo ;
       firebase.auth().onAuthStateChanged((userResult) => {
+
+        if(userResult == null)
+        window.location.href ="/HomePage";
         
         
           this.setState({ fullName: userResult.displayName });
@@ -346,6 +349,7 @@ this.setState({ clicked: false });
         currentUser={this.state.user}
         isPrivateChannel={true}
       />
+     
   </div> 
 
 

@@ -48,6 +48,9 @@ class Profile extends Component {
     componentWillMount() {
 
             firebase.auth().onAuthStateChanged((userResult) => {
+
+                if(userResult == null)
+                window.location.href ="/HomePage";
                 
                 
                 this.setState({ userName: userResult.displayName });

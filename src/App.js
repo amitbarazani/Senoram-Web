@@ -34,8 +34,12 @@ import Login from './screens/ToolBar/Login';
 import SignUp from './screens/ToolBar/SignUp';
 import passwordReset from './screens/ToolBar/PasswordReset';
 import Profile from './screens/Profile/Profile';
+import Clients from './screens/Profile/Clients';
+import Agents from './screens/Profile/Agents';
 
 import MenuAgent from './screens/MenuPage/MenuAgent';
+import MenuAdmin from './screens/MenuPage/MenuAdmin';
+
 import LoginAgent from './screens/ToolBar/LoginAgent';
 import SignUpAgent from './screens/ToolBar/SignUpAgent';
 import passwordResetAgent from './screens/ToolBar/PasswordResetAgent';
@@ -94,9 +98,13 @@ class App extends Component {
         <Route path="/SignUp" component={SignUp} />
         <Route path="/passwordReset" component={passwordReset} />
         <Route path="/Profile" component={Profile} />
+        <Route path="/Clients" component={Clients} />
+        <Route path="/Agents" component={Agents} />
 
 
         <Route path="/MenuAgent" component={MenuAgent} />
+        <Route path="/MenuAdmin" component={MenuAdmin} />
+
         <Route path="/LoginAgent" component={LoginAgent} />
         <Route path="/SignUpAgent" component={SignUpAgent} />
         <Route path="/passwordResetAgent" component={passwordResetAgent} />

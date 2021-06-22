@@ -15,6 +15,7 @@ import Unsplash, { toJson } from "unsplash-js";
 import logo from  './logo_Royal.jpeg';
 import ship from './ship.jpeg';
 import Card from '@material-ui/core/Card';
+import firebase from '../Firebase/Firebase';
 
 const useStyles = makeStyles({
     sliderWidth: {
@@ -267,7 +268,12 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
     
 
 
+firebase.auth().onAuthStateChanged((userResult) => {
 
+      if(userResult == null)
+      window.location.href ="/HomePage";
+
+});
 
 
 
@@ -275,6 +281,7 @@ function getSightseeing(location,lat, lng, checkedSightseeing, checkedNightLife,
 
    let test = 0;
     const [pointerToData, setPointerToData] = useState({ pointerToData: 0 });
+    const [userName, setUserName] = useState(null); // 
     const [data_original, setData] = useState({ data_original: "" });
     const [lat_original, setLat] = useState({ lat_original: 0 });
     const [lng_original, setLng] = useState({ lng_original: 0 });

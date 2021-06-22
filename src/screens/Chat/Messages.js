@@ -31,6 +31,7 @@ class Messages extends React.Component {
     fullName: '',
     email: '',
     photoURL: '',
+    length: 0,
   };
 
 
@@ -98,8 +99,9 @@ class Messages extends React.Component {
                  this.addListeners(this.state.channel.id);
                 
               }  
-             
+           
           }
+         
       })
       .catch(err => {
          console.log(err)
@@ -193,6 +195,22 @@ class Messages extends React.Component {
                   }  
                  
               }
+
+             axios.get('/privateMessages/' + this.state.channel.id + '.json')
+             .then(res => {
+
+              if (res.data == null)
+              {
+                this.setState({ length: 0  });
+                //this.setState({ length: 0  });
+              }
+              
+
+            })
+            .catch(err => {
+              console.log(err)
+           })
+
           })
           .catch(err => {
              console.log(err)
@@ -243,7 +261,8 @@ class Messages extends React.Component {
       loadedMessages.push(snap.val());
       this.setState({
         messages: loadedMessages,
-        messagesLoading: false
+        messagesLoading: false, 
+        length: loadedMessages.length,    
       });
       this.countUniqueUsers(loadedMessages);
     });
@@ -294,6 +313,7 @@ class Messages extends React.Component {
     this.setState({ numUniqueUsers });
   };
 
+  
   displayMessages = messages =>
     messages.length > 0 &&
     messages.map(message => (
@@ -308,6 +328,24 @@ class Messages extends React.Component {
         
       />
     ));
+ /*
+    displayMessages (messages) {
+    
+      if (messages.length > 0 )
+      messages.map(message => (
+        <Message
+          key={message.timestamp}
+          message={message}
+          user={this.state.user}
+          fullName = {message.user.name}
+          photoURL = {message.user.avatar}
+          //fullName= {this.state.fullName}
+          //photoURL = {this.state.photoURL}
+          
+        />
+      ));
+    } 
+    */
 
   displayChannelName = channel => {
     return channel
@@ -318,16 +356,32 @@ class Messages extends React.Component {
 
 
   render() {
-    const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel } = this.state;
+    const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel, length } = this.state;
     return (
       <div>
+       
       <React.Fragment>
 
-      <Segment>
+
+
+{ length == 0 ? <Segment>
           <Comment.Group className="messages">
-              {this.displayMessages(messages)}
+         
+           
           </Comment.Group>
         </Segment>
+         :
+<Segment>
+          <Comment.Group className="messages">
+          {this.displayMessages(messages) }
+           
+          </Comment.Group>
+        </Segment> } 
+     
+        
+       
+      
+    
 
         <MessageForm
           messagesRef={messagesRef}

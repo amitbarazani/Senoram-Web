@@ -337,7 +337,7 @@ onChange = {(event) => {
  
   let a = [];
   for (let key in this.state.users) 
-  if (this.state.users[key].fullName.includes(this.state.searchToken) )
+  if (this.state.users[key].fullName.toLowerCase().includes(this.state.searchToken.toLowerCase()) )
   {
     
     a.push(this.state.users[key]);

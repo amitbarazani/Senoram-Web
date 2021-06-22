@@ -8,6 +8,7 @@ import ship from '../ship.jpeg';
 import axios from '../../Firebase/axios';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import noImage from './noImage.JPG';
 
 const style ={
     
@@ -42,15 +43,18 @@ class Login extends Component {
       let a;
       if (this.state.email != '' && this.state.fullName != '' && this.state.password != '' && this.state.idNumber != '')
       {
-       
+        
         UserInfo.nameUser = this.state.fullName;
         console.log(UserInfo.nameUser);
         e.preventDefault();
+       
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
             
         }).then((res) => {
           const user = firebase.auth().currentUser;
            user.updateProfile({ displayName: this.state.fullName })
+        //  const uploadTask = firebase.storage().ref(`images/` + this.state.idNumber + '.jpg').put('./noImage.JPG');
+          
         
 
            
@@ -60,9 +64,11 @@ class Login extends Component {
             firebase.auth().onAuthStateChanged((userResult) => {
              
               axios.put('/Clients/' + this.state.idNumber + '.json', this.state).then(function (response) {
+         
+               
                 console.log(response);
                 a = response.data.name;
-                window.location.href = "../MenuClient";
+               window.location.href = "../MenuClient";
                  
                     
 

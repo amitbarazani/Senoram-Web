@@ -23,20 +23,93 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            blocked: 'no',
         };
     }
 
-
     login(e) {
         e.preventDefault();
-        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-            window.location.href = "../MenuAgent";
-        })
+
+        axios.get('/Blocked.json')
+        .then(res => {
+
+            for (let key in res.data) {
+                if (res.data[key].email == this.state.email)
+                {
+                    this.setState({ blocked: "yes" });
+                    console.log(this.state.blocked)
+                   alert("Sorry, You have been blocked!");
+          
+                
+
+                }  
+                
+                  
+            }
+
+        }) .then (
+
+        axios.get('/Clients.json')
+            .then(res => {
+    
+                for (let key in res.data) {
+                    if (res.data[key].email == this.state.email)
+                    {
+                       this.setState({ id: res.data[key].idNumber });
+                    }  
+                    
+                      
+                }
+
+                if (this.state.blocked == "yes" )
+                {
+                    console.log("im inn")
+                    window.location.href = "../Login"; 
+                }
+               
+                else 
+                {
+                    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+                    
+                   
+                    })
+            
+            
+                    .then((something) =>{
+            
+                        window.location.href = "../MenuAgent";
+                   
+                     
+                       
+                       // window.location.href = "../MenuClient";
+                        //console.log(response);
+                     
+                            
+            
+                
+                      })
+        
+                      
+                .catch((error) => {
+                    alert("One of the fields is invalid!");
+                });
+                }
+              
+        
+                
+            })
+            .catch(err => {
+               console.log(err)
+            })
+
+            
+        )
+
+       
+
+         
         
         
-        .catch((error) => {
-            alert("One of the fields is invalid!");
-        });
     }
 
 

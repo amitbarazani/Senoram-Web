@@ -57,6 +57,9 @@ const [id, setID] = useState(null);
 authListener();
  function authListener() {
     firebase.auth().onAuthStateChanged((userResult) => {
+
+      if(userResult == null)
+      window.location.href ="/HomePage";
     
           setUserName(userResult.displayName);
           setEmail(userResult.email);

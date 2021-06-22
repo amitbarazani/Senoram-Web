@@ -15,7 +15,9 @@ const timeFromNow = timestamp => moment(timestamp).fromNow();
 
 const Message = ({ message, user , photoURL, fullName}) => (
   <Comment>
-    <Comment.Avatar src={photoURL}>   </Comment.Avatar>
+
+    {photoURL ?  <Comment.Avatar src={photoURL}>   </Comment.Avatar> :  <Comment.Avatar src={'https://msrealtors.org/wp-content/uploads/2018/11/no-user-image.gif'}>   </Comment.Avatar>}
+   
     <Comment.Content className={isOwnMessage(message, user)}>
       <Comment.Author as="a">{fullName}</Comment.Author>
       <Comment.Metadata>{timeFromNow(message.timestamp)}</Comment.Metadata>
