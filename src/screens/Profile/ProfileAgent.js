@@ -58,7 +58,7 @@ class Profile extends Component {
             });
 
       
-                const itemsRef = firebase.database().ref(`Agents/`);
+                const itemsRef = firebase.database().ref(`Clients/`);
                 itemsRef.on('value', (snapshot) => {
                     let reservations = snapshot.val();
                     for (let reservation in reservations) {
