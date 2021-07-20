@@ -40,7 +40,9 @@ class Profile extends Component {
             id: '',
             userName: '',
             reservations: null,
+            reservations2: null,
             presentable: null,
+            presentableBlocked: null,
         };
     }
 
@@ -76,12 +78,18 @@ class Profile extends Component {
                         fullName: reservations[reservation].fullName,
                         idNumber: reservations[reservation].idNumber,
                         email: reservations[reservation].email,
+                        online: "No",
+                        role: "Agent",
+                        password: reservations[reservation].password,
                         
                     });
                     newState2.push({
                         fullName: reservations[reservation].fullName,
                         idNumber: reservations[reservation].idNumber,
                         email: reservations[reservation].email,
+                        online: "No",
+                        role: "Agent",
+                        password: reservations[reservation].password,
 
                     });
 
@@ -96,7 +104,43 @@ class Profile extends Component {
         });
 
         
+        const itemsRef3 = firebase.database().ref(`Blocked/`);
+        itemsRef3.on('value', (snapshot) => {
+            let reservations = snapshot.val();
 
+           
+            let newState_2 = [];
+            let newState2_2 = [];
+
+            for (let reservation in reservations) {
+                if (reservations[reservation].role == "Agent") {
+                    newState_2.push({
+                        fullName: reservations[reservation].fullName,
+                        idNumber: reservations[reservation].idNumber,
+                        email: reservations[reservation].email,
+                        online: "No",
+                        role: "Agent",
+                        password: reservations[reservation].password,
+                    });
+                    newState2_2.push({
+                        fullName: reservations[reservation].fullName,
+                        idNumber: reservations[reservation].idNumber,
+                        email: reservations[reservation].email,
+                        online: "No",
+                        role: "Agent",
+                        password: reservations[reservation].password,
+
+                    });
+
+                    
+                }
+               
+            }
+            this.setState({ reservations2: newState_2 });
+            this.setState({ presentableBlocked: newState2_2 });
+        
+           
+        });
        
             
        
@@ -133,7 +177,9 @@ class Profile extends Component {
         
 
         const reservations = this.state.presentable;
+        const reservations2 = this.state.presentableBlocked;
         let condition;
+        let condition2;
         if (reservations) {
             condition =    <MaterialTable
             style={{ padding: '0 20px'}}
@@ -198,7 +244,80 @@ class Profile extends Component {
             condition = <h3>No Agents Yet!</h3>;
         }
 
-      
+        if (reservations2) {
+            condition2 =    <MaterialTable
+            style={{ padding: '0 20px'}}
+            title="Blocked Agents"
+        
+
+
+            options={{
+                search: true,
+                selection: true,
+                exportButton: true
+              }}
+
+
+            data={reservations2}
+
+            columns={[
+                { title: "Full Name", field: 'fullName' } ,
+                { title: "ID", field: 'idNumber' },
+                { title: "email", field: 'email' },
+                { title: "Role", field: 'role' },
+                { title: "Online", field: 'online' },
+            ]}
+
+            actions={[
+                {
+                    tooltip: 'Disable All Selected Clients',
+                    icon: 'add',
+                    onClick: (evt, data) => {
+                        if (window.confirm("Would you really like to Enable ?") === true) {
+                            data.forEach(data1 => {
+                                
+                            
+
+                                axios.delete(`Blocked/` + data1.idNumber + '.json');
+                              
+                                //var toPost = { email:  data1.email};
+
+                                var toPost = { email:  data1.email ,  fullName:  data1.fullName , idNumber:  data1.idNumber , Online: "No", password:  data1.password, role: "Agent" };
+                              /*  var toPost2 = [
+                                    {"firstName":"John", "lastName":"Doe"},
+                                    {"firstName":"Anna", "lastName":"Smith"},
+                                    {"firstName":"Peter", "lastName":"Jones"}
+                                  ]
+                                  */
+                                axios.put('/Clients/' +  data1.idNumber + '.json', toPost).then(function (response) {
+         
+                        
+                                     
+                                        
+                    
+                            })
+                               
+
+                            });
+                        }
+
+
+                        //axios.delete(`coordinators/` + data[0].id + '.json'),
+
+
+
+                    }
+                }
+
+
+            ]}
+
+        ></MaterialTable>
+
+
+        } else {
+            condition2 = <h3>No Blocked Agents Yet!</h3>;
+        }
        
       
         return (
@@ -247,6 +366,34 @@ class Profile extends Component {
                     </Card>
                     </Grid>
                     </div>
+
+                    <br></br>
+
+<div>
+<Grid
+container
+spacing={0}
+direction="column"
+alignItems="center"
+justify="center"
+
+>
+<Card style={style}>
+
+
+
+
+{condition2}
+
+
+
+
+</Card>
+</Grid>
+
+
+
+</div>
 
 
 
