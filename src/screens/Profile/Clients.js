@@ -342,11 +342,18 @@ class Profile extends Component {
             condition2 = <h3>No Blocked Clients Yet!</h3>;
         }
       
-       
+       /*<div style={{ 
+        backgroundColor: "#f0f0f5"}} >
       
+        */
         return (
-            <div style={{ 
-                backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
+            
+            
+
+<div style={{ 
+                backgroundImage: `url(${ship})` ,backgroundPositionX:'100% ' ,height: '1100px' ,backgroundRepeat: 'repeat' , margin:' 0 auto'}} >
+                 
+
                  
 
                  <span>
@@ -365,7 +372,7 @@ class Profile extends Component {
     
                 
                
-
+  
            
 
                 
@@ -423,7 +430,7 @@ class Profile extends Component {
         
                     </div>
 
-
+                
 
 
             </div>

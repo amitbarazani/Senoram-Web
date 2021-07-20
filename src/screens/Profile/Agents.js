@@ -322,8 +322,7 @@ class Profile extends Component {
       
         return (
             <div style={{ 
-                backgroundImage: `url(${ship})` ,backgroundPositionX:'50% ' ,height: '1000px' ,backgroundRepeat: 'no-repeat' , margin:' 0 auto'}} >
-                 
+                backgroundImage: `url(${ship})` ,backgroundPositionX:'100% ' ,height: '1100px' ,backgroundRepeat: 'repeat' , margin:' 0 auto'}} >
 
                  <span>
                <a href="/MenuAdmin" target="_self" >           
